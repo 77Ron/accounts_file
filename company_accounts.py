@@ -29,6 +29,8 @@ class Dept1Account(Account):
     
     def discount(self):
         disc1 = .02
+        if self.balance < 0:
+            disc1 = 0
         if self.balance > 100:
             disc1 = .10
         return round(self.balance * disc1, 2)
@@ -43,6 +45,8 @@ class Dept2Account(Account):
     
     def discount(self):
         disc2 = 0
+        if self.balance < 0:
+            disc2 = 0
         if self.balance > 100:
             disc2 = .10
         return round(self.balance * disc2, 2)
@@ -57,6 +61,8 @@ class Dept3Account(Account):
 
     def discount(self):
         disc3 = .05
+        if self.balance < 0:
+            disc3 = 0
         if self.balance > 100:
             disc3 = .10
         return round(self.balance * disc3, 2)
