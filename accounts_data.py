@@ -1,5 +1,5 @@
 # Write, update, and delete account info in a saved dictionary file.
-# Display file by selected surname initial.
+# Display file by selected department and surname initial.
 # Display account table with pandas.
 # Display account graph with matplotlib. 
 # Create a MySQL file from the account dictionary file.
