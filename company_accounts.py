@@ -39,7 +39,6 @@ class Dept2Account(Account):
         Account.__init__(self, dept, name, id, address, p_code, balance)
         self.deptname = dept2
         self.discnt = self.discount()
-
     
     def discount(self):
         disc2 = 0

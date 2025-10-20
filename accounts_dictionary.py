@@ -155,8 +155,7 @@ def PrintDictFile():
                 elif info[2] == 2:
                     A0 = Dept2Account(info[2], name, id, info[0], info[1], info[3])
                 elif info[2] == 3:
-                    A0 = Dept3Account(info[2], name, id, info[0], info[1], info[3])
-             
+                    A0 = Dept3Account(info[2], name, id, info[0], info[1], info[3])         
                 print(A0)
                 count+=1
                 balance_total += info[3]
@@ -164,9 +163,7 @@ def PrintDictFile():
     print("--------------")
     print("Total accounts:", count)
     if surnames1 == 'All': 
-        print("Total of balances:", balance_total)
-
-    return
+        print("Total of balances:", round(balance_total,2))
 
 
 def TableDictFile():
@@ -176,7 +173,7 @@ def TableDictFile():
     #df.style.set_properties(**{'text-align': 'left'}) ---- Requires install.
     pd.options.display.float_format = '{:.2f}'.format
     print(df)
-    return
+    
 
 def GraphDictFile():
     acct_dict = LoadDictFile()
