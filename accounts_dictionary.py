@@ -44,33 +44,33 @@ def UpdateDictFile():
                 continue
             break
 
-        ename = input("First Name: ")
+        efname = input("First Name: ")
         esurname = input("Surname: ")
-        aname = esurname + ", " + ename
+        ename = esurname + ", " + efname
         
         while True:
             try:
-                id = int(input("ID number:"))
+                eid = int(input("ID number:"))
             except Exception:
                 print("ID must be numeric.")
                 continue
             break
         
         #Currently allows only one department per account.
-        if (aname, id) in acct_dict and acct_dict[aname, id][2] == edept:
-            print(acct_dict[aname, id])
+        if (ename, eid) in acct_dict and acct_dict[ename, eid][2] == edept:
+            print(acct_dict[ename, eid])
             del1 = input("Enter 'del' to delete this account: ")
             if del1 == 'del':
                 try:
-                    del acct_dict[aname, id]
-                    print("Account deleted:", aname, id)
+                    del acct_dict[ename, eid]
+                    print("Account deleted:", ename, eid)
                 except Exception:
                     print("Account cannot be deleted.")
         else:
-            ep_address = input("Address: ")
+            eaddress = input("Address: ")
             while True:
-                ep_code = str(input("Post code: ")).upper()
-                if len(ep_code) > 7:
+                ecode = str(input("Post code: ")).upper()
+                if len(ecode) > 7:
                     print("Post code must be less than 8 characters.")
                     continue
                 else: 
@@ -86,11 +86,11 @@ def UpdateDictFile():
                 break
 
             if edept == 1:
-                A0 = Dept1Account(edept, aname, id, ep_address, ep_code, ebalance)
+                A0 = Dept1Account(edept, ename, eid, eaddress, ecode, ebalance)
             elif edept == 2:
-                A0 = Dept2Account(edept, aname, id, ep_address, ep_code, ebalance)
+                A0 = Dept2Account(edept, ename, eid, eaddress, ecode, ebalance)
             elif edept == 3:
-                A0 = Dept3Account(edept, aname, id, ep_address, ep_code, ebalance)
+                A0 = Dept3Account(edept, ename, eid, eaddress, ecode, ebalance)
             
             print("New Account: ", A0)
             esave1 = ""
