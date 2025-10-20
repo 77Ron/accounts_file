@@ -144,6 +144,7 @@ def PrintDictFile():
 
     acct_dict = LoadDictFile()
     
+    #Print currently recalculates discount.
     count=0
     balance_total=0
     for (name,id), info in acct_dict.items():
