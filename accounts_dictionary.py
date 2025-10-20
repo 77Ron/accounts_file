@@ -8,6 +8,7 @@ from company_accounts import *
 
     
 def LoadDictFile():
+
     while True:
         try:
             f2 = open("accts2", "rb")
@@ -15,10 +16,10 @@ def LoadDictFile():
             #print(acct_dict)
             f2.close()
         except FileNotFoundError as e:
-            print("Cannot find accts2: %s" % (e.strerror))
+            print("Cannot find file, accts2: %s" % (e.strerror))
             init1 = ""
             while init1 != 'Y' and init1 != 'N':
-                init1 = input("Initialise the file? (Y/N): ")
+                init1 = input("Initialise the accounts file? (Y/N): ")
             if init1 == 'Y':
                 print("Initialising file.")
                 acct_dict_file = {}
@@ -26,12 +27,15 @@ def LoadDictFile():
                 pickle.dump(acct_dict_file, f2)
                 f2.close()
         except IOError as e:
-            print("Cannot open accts2: %s" % (e.strerror)); exit()
+            print("Cannot open file, accts2: %s" % (e.strerror)); exit()
 
         return acct_dict_file
 
+
 def UpdateDictFile():
+
     acct_dict = LoadDictFile()
+
     while True:
         while True:
             try:
@@ -43,10 +47,12 @@ def UpdateDictFile():
                 print("Department must be numeric.")
                 continue
             break
-
-        efname = input("First Name: ")
-        esurname = input("Surname: ")
-        ename = esurname + ", " + efname
+        
+        ename = ""
+        while len(ename) < 1 or len(ename) > 25:
+            efname = input("First Name: ")
+            esurname = input("Surname: ")
+            ename = esurname + ", " + efname
         
         while True:
             try:
@@ -67,7 +73,9 @@ def UpdateDictFile():
                 except Exception:
                     print("Account cannot be deleted.")
         else:
-            eaddress = input("Address: ")
+            eaddress = ""
+            while len(eaddress) < 1 or len(eaddress) > 25:
+                eaddress = input("Address: ")
             while True:
                 ecode = str(input("Post code: ")).upper()
                 if len(ecode) > 7:
@@ -111,6 +119,7 @@ def UpdateDictFile():
             pickle.dump(acct_dict, f2)
             f2.close()
             return
+
 
 def PrintDictFile():
 
@@ -167,7 +176,9 @@ def PrintDictFile():
 
 
 def TableDictFile():
+
     acct_dict = LoadDictFile()
+
     df = pd.DataFrame.from_dict(acct_dict, orient='index', 
                                 columns = ['-Address-','-Post Code-', '-Dept.-', '-Balance-', '-Discount-'])
     #df.style.set_properties(**{'text-align': 'left'}) ---- Requires install.
@@ -176,12 +187,14 @@ def TableDictFile():
     
 
 def GraphDictFile():
+
     acct_dict = LoadDictFile()
+
     df = pd.DataFrame.from_dict(acct_dict, orient='index', 
                                 columns = ['-Address-','-Post Code-', '-Dept.-', '-Balance-', '-Discount-'])
     plt.figure(figsize=(9,9))
     plt.grid(True)
-    plt.title("Discount vs Balance", fontsize = 20)
+    plt.title("Balance vs Discount", fontsize = 20)
     plt.xlabel("Discount", fontsize = 16)
     plt.ylabel("Balance", fontsize = 16)
     plt.bar(df["-Discount-"].values, df["-Balance-"].values, color = "black")

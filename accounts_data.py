@@ -18,9 +18,10 @@ def main():
     fl1 = ""
     while fl1 != 'E':
         fl1 = input("U'pdate accounts, P'rint accounts, T'able view, G'raph view, C'reate database, L'ogin view, E'xit: ")
+        
         if fl1 == 'U':
+            uname = input("Enter username: ")
             with open("accts1", "a") as f:
-                uname = input("Enter username: ")
                 f.write(uname + " logged in " + str(datetime.now())+ " - ")
             UpdateDictFile()
             with open("accts1", "a") as f:
@@ -47,7 +48,6 @@ def main():
             print("Option not avaiable yet.")
 
     exit()
-
 
 if __name__ == '__main__':
     main()
