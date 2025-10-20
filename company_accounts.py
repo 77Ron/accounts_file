@@ -8,13 +8,12 @@ class Account:
     
     def __init__(self, dept = 0, name= "-None-", id = 0, address = "-Blank-", p_code = "--- ---", balance = 0.00):
         self.dept = dept
-        self.deptname = "None"
         self.name = name
         self.id = id
         self.address = address
         self.p_code = p_code
         self.balance = balance
-
+   
     def __str__(self):
         return "Company: %s   %i %-15s  %-20s   %i  %s, %s, %.2f"\
               % (self.company, self.dept, self.deptname, self.name, self.id, self.address, self.p_code, self.balance)
@@ -23,10 +22,9 @@ class Dept1Account(Account):
 
     def __init__(self, dept = 1, name= "-None-", id = 0, address = "-Blank-", p_code = "--- ---", balance = 0.00):
         Account.__init__(self, dept, name, id, address, p_code, balance)
+        self.deptname = dept1
+        self.discnt = self.discount()
 
-    def department(self):
-        return dept1
-    
     def discount(self):
         disc1 = .02
         if self.balance < 0:
@@ -39,9 +37,9 @@ class Dept2Account(Account):
 
     def __init__(self, dept = 2, name= "-None-", id = 0, address = "-Blank-", p_code = "--- ---", balance = 0.00):
         Account.__init__(self, dept, name, id, address, p_code, balance)
+        self.deptname = dept2
+        self.discnt = self.discount()
 
-    def department(self):
-        return dept2
     
     def discount(self):
         disc2 = 0
@@ -55,9 +53,8 @@ class Dept3Account(Account):
 
     def __init__(self, dept = 3, name= "-None-", id = 0, address = "-Blank-", p_code = "--- ---", balance = 0.00):
         Account.__init__(self, dept, name, id, address, p_code, balance)
-
-    def department(self):
-        return dept3
+        self.deptname = dept3
+        self.discnt = self.discount()
 
     def discount(self):
         disc3 = .05

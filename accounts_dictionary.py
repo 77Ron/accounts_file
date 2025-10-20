@@ -55,7 +55,8 @@ def UpdateDictFile():
                 print("ID must be numeric.")
                 continue
             break
-
+        
+        #Currently allows only one department per account.
         if (aname, id) in acct_dict and acct_dict[aname, id][2] == edept:
             print(acct_dict[aname, id])
             del1 = input("Enter 'del' to delete this account: ")
@@ -66,17 +67,7 @@ def UpdateDictFile():
                 except Exception:
                     print("Account cannot be deleted.")
         else:
-            if edept == 1:
-                A0 = Dept1Account()
-            elif edept == 2:
-                A0 = Dept2Account()
-            elif edept == 3:
-                A0 = Dept3Account()
-            A0.dept = edept
-            A0.deptname = A0.department()
-            A0.name = aname
-            A0.id = id
-            A0.address = input("Address: ")
+            ep_address = input("Address: ")
             while True:
                 ep_code = str(input("Post code: ")).upper()
                 if len(ep_code) > 7:
@@ -84,23 +75,29 @@ def UpdateDictFile():
                     continue
                 else: 
                     break
-            A0.p_code = ep_code
+        
             while True:
                 try:
                     ebalance = float(input("Account balance: "))
+                    ebalance = round(ebalance,2)
                 except Exception:
                     print("Balance must be numeric.")
                     continue
                 break
-            A0.balance = round(ebalance,2)
 
+            if edept == 1:
+                A0 = Dept1Account(edept, aname, id, ep_address, ep_code, ebalance)
+            elif edept == 2:
+                A0 = Dept2Account(edept, aname, id, ep_address, ep_code, ebalance)
+            elif edept == 3:
+                A0 = Dept3Account(edept, aname, id, ep_address, ep_code, ebalance)
+            
             print("New Account: ", A0)
             esave1 = ""
             while esave1 != 'Y' and esave1 != 'N':
                 esave1 = input("Is the information correct? (Y/N): ")
             if esave1 == "Y":
-                discnt = A0.discount()
-                edict = {(A0.name, A0.id):[A0.address, A0.p_code, edept, A0.balance, discnt]}
+                edict = {(A0.name, A0.id):[A0.address, A0.p_code, A0.dept, A0.balance, A0.discnt]}
                 acct_dict.update(edict)
             else:
                 print("Account", A0.name, A0.id," was not updated.")
@@ -119,12 +116,12 @@ def PrintDictFile():
 
     while True:
         try:
-            department1 = input("Enter department number, or press Enter for All: ")
-            if department1 == "": 
-                department1 = 0
+            deptin = input("Enter department number, or press Enter for All: ")
+            if deptin == "": 
+                deptin = 0
                 break 
-            department1 = int(department1)
-            if department1 < 1 or department1 > 3:
+            deptin = int(deptin)
+            if deptin < 1 or deptin > 3:
                 print("Department must be 1, 2, or 3.")
                 continue
         except Exception:
@@ -150,21 +147,15 @@ def PrintDictFile():
     count=0
     balance_total=0
     for (name,id), info in acct_dict.items():
-        if department1 == 0 or info[2] == department1:
+        if deptin == 0 or info[2] == deptin:
             if name[0] in let1:
                 if info[2] == 1:
-                    A0 = Dept1Account()
+                    A0 = Dept1Account(info[2], name, id, info[0], info[1], info[3])
                 elif info[2] == 2:
-                    A0 = Dept2Account()
+                    A0 = Dept2Account(info[2], name, id, info[0], info[1], info[3])
                 elif info[2] == 3:
-                    A0 = Dept3Account()
-                A0.dept = info[2]
-                A0.deptname = A0.department()
-                A0.name = name
-                A0.id = id
-                A0.address = info[0]
-                A0.p_code = info[1]
-                A0.balance = info[3]
+                    A0 = Dept3Account(info[2], name, id, info[0], info[1], info[3])
+             
                 print(A0)
                 count+=1
                 balance_total += info[3]
