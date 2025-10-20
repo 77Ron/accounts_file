@@ -50,8 +50,8 @@ def UpdateDictFile():
         
         ename = ""
         while len(ename) < 1 or len(ename) > 25:
-            efname = input("First Name: ")
-            esurname = input("Surname: ")
+            efname = input("First Name: ").strip()
+            esurname = input("Surname: ").strip()
             ename = esurname + ", " + efname
         
         while True:
@@ -75,7 +75,7 @@ def UpdateDictFile():
         else:
             eaddress = ""
             while len(eaddress) < 1 or len(eaddress) > 25:
-                eaddress = input("Address: ")
+                eaddress = input("Address: ").strip()
             while True:
                 ecode = str(input("Post code: ")).upper()
                 if len(ecode) > 7:
