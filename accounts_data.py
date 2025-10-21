@@ -18,7 +18,7 @@ def main():
 
     fl1 = ""
     while fl1 != 'E':
-        fl1 = input("U'pdate accounts, P'rint accounts, T'able view, G'raph view, C'reate database, L'ogin view, E'xit: ")
+        fl1 = input("U'pdate accounts, P'rint accounts, T'able view, G'raph view, C'reate database, I'mport database, L'ogin view, E'xit: ")
         
         if fl1 == 'U':
             uname = input("Enter username: ")
@@ -48,6 +48,9 @@ def main():
         elif fl1 == 'C':
             print("Option not avaiable yet.")
 
+        elif fl1 == 'I':
+            print("Option not avaiable yet.")
+    
     exit()
 
 if __name__ == '__main__':
