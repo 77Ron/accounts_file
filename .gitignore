@@ -1,2 +1,6 @@
 accts1
 accts2
+
+__pycache__/
+*.py[cod]
+*$py.class
