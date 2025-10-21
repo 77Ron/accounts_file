@@ -2,7 +2,8 @@
 # Display file by selected department and surname initial.
 # Display account table with pandas.
 # Display account graph with matplotlib. 
-# Create a MySQL file from the account dictionary file.
+# Create a MySQL database from the account dictionary file.
+# Create an account dictionary file from a MySQL database.
 
 #Changes to individual accounts requires delete and re-entry a this time.
 #Database creation not available yet.
