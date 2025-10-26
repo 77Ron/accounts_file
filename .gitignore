@@ -1,5 +1,7 @@
 accts1
 accts2
+accts_temp2
+accts2save
 
 __pycache__/
 *.py[cod]

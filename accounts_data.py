@@ -8,7 +8,6 @@
 #Changes to individual accounts requires delete and re-entry a this time.
 #Database creation not available yet.
 
-from datetime import datetime
 from accounts_dictionary import *
 
 
@@ -50,6 +49,9 @@ def main():
 
         elif fl1 == 'I':
             print("Option not avaiable yet.")
+
+        elif fl1 == 'Reformat':
+            ReformatDictFile()
     
     exit()
 

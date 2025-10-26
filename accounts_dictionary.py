@@ -1,5 +1,6 @@
 #Accounts dictionary
 
+from datetime import datetime
 import pickle
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -140,7 +141,7 @@ def PrintDictFile():
 
     let0 = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
     
-    surnames1 = input("Enter surname first letters separated by commas, or press Enter for All: ")
+    surnames1 = input("Enter surname first letters separated by commas, or press Enter for All: ").upper().strip()
     
     if surnames1 == "":
         surnames1 = 'All'
@@ -201,3 +202,26 @@ def GraphDictFile():
     plt.gca().yaxis.set_major_formatter(StrMethodFormatter('{x:,.2f}'))
     plt.gca().xaxis.set_major_formatter(StrMethodFormatter('{x:,.2f}'))
     plt.show()
+
+
+def ReformatDictFile():
+
+    acct_dict = LoadDictFile()
+    
+    acct_dict_temp = {}
+    for (name,id), info in acct_dict.items():
+        d1 = datetime.now() #Consider using Julian date.
+        d2 = int(d1.strftime("%Y%m%d"))
+        newinfo = [[0, 0.0, 0.0, 0],[0, 0.0, 0.0, 0],[0, 0.0, 0.0, 0]]
+        newinfo[info[2]-1][0] = info[2]
+        newinfo[info[2]-1][1] = info[3]
+        newinfo[info[2]-1][2] = info[4]
+        newinfo[info[2]-1][3] = d2
+
+        account_temp = {(name, id):[info[0], info[1], newinfo]}
+        print(name, id, info[0], info[1], newinfo)
+        acct_dict_temp.update(account_temp)
+           
+    f2 = open("accts_temp2", "wb")
+    pickle.dump(acct_dict_temp, f2)
+    f2.close()
