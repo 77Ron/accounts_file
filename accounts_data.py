@@ -1,12 +1,13 @@
 # Write, update, and delete account info in a saved dictionary file.
-# Display file by selected department and surname initial.
+# Display file by department and surname initial.
 # Display account table with pandas.
-# Display account graph with matplotlib. 
-# Create a MySQL database from the account dictionary file.
-# Create an account dictionary file from a MySQL database.
+# Display account graph with matplotlib.
+# 
+# ------- Not available at this time. ----------
+# Create or update a MySQL database from the account dictionary file.
+# Import accounts from a MySQL database.
+# Import accounts from a text file.
 
-#Changes to individual accounts requires delete and re-entry a this time.
-#Database creation not available yet.
 
 from accounts_dictionary import *
 
@@ -17,7 +18,7 @@ def main():
 
     fl1 = ""
     while fl1 != 'E':
-        fl1 = input("U'pdate accounts, P'rint accounts, T'able view, G'raph view, C'reate database, I'mport database, L'ogin view, E'xit: ")
+        fl1 = input("(U)pdate accounts, (P)rint, (T)able, (G)raph, (D)atabase update, (I)mport database, (txt) file import, (L)ogin print, (E)xit: ")
         
         if fl1 == 'U':
             uname = input("Enter username: ")
@@ -35,7 +36,16 @@ def main():
             
         elif fl1 == 'G':
             GraphDictFile()
+      
+        elif fl1 == 'D':
+            print("Option not avaiable yet.")
 
+        elif fl1 == 'I':
+            print("Option not avaiable yet.")
+
+        elif fl1 == 'txt':
+            print("Option not avaiable yet.") 
+        
         elif fl1 == 'L':
             try:
                 with open("accts1", "r") as f:
@@ -43,13 +53,7 @@ def main():
                         print(line1)
             except Exception:
                 print("Login file does not exist or cannot be opened.")
-
-        elif fl1 == 'C':
-            print("Option not avaiable yet.")
-
-        elif fl1 == 'I':
-            print("Option not avaiable yet.")
-
+   
         elif fl1 == 'Reformat':
             ReformatDictFile()
     
