@@ -15,8 +15,8 @@ class Account:
         self.balance = balance
    
     def __str__(self):
-        return "Company: %s   %i %-15s  %-20s   %i  %s, %s, %.2f %.2f"\
-              % (self.company, self.dept, self.deptname, self.name, self.id, self.address, self.p_code, self.balance, self.discnt)
+        return "%s  %-20s   %i  %-25s %s    %i %-15s %8.2f %8.2f"\
+              % (self.company, self.name, self.id, self.address, self.p_code, self.dept, self.deptname, self.balance, self.discnt)
     
 class Dept1Account(Account):
 

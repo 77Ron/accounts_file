@@ -178,6 +178,7 @@ def PrintDictFile():
     #Print currently recalculates discount.
     count=0
     balance_total=0
+    print(" "*92+"-Balance- -Discount-")
     for (name,id), info in acct_dict.items():
             if name[0] in let1:
                 if (deptin == 0 or deptin == 1) and info[2][3] > 0:
@@ -196,9 +197,12 @@ def PrintDictFile():
             count+=1
 
     print("--------------")
-    print("Total accounts:", count)
     if surnames1 == 'All': 
-        print("Total of balances:", round(balance_total,2))
+        print("Total accounts:", count," "*55,"Total of balances:", round(balance_total,2))
+    else:
+        print("Total accounts:", count)
+    print()
+
 
 
 def TableDictFile():
