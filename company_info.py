@@ -19,3 +19,6 @@ d2rng = 100.00
 d3dc1 = 5
 d3dc2 = 20
 d3rng = 100.00
+
+#Preferences---------
+bgcol = 'PaleTurquoise3'

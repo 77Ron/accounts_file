@@ -7,6 +7,9 @@ import matplotlib.pyplot as plt
 from matplotlib.ticker import StrMethodFormatter
 from company_accounts import *
 
+import tkinter as tk
+from tkinter import ttk
+from tkinter.ttk import *
     
 def LoadDictFile():
 
@@ -171,37 +174,50 @@ def PrintDictFile():
         let1=[]
         for x in range (0,len(surnames1),2):
             if surnames1[x] in let0: let1.append(surnames1[x])
-    print("Surname first letters:", let1)
 
     acct_dict = LoadDictFile()
     
     #Print currently recalculates discount.
+
+    root = tk.Tk() 
+    root.title("Account Balance File")
+    root.geometry("900x500")
+    T = tk.Text(root, height = 700, width = 900)
+    l = Label(root, text = "Print Accounts")
+    l.config(font =("Courier", 14))
+    l.pack()
+    T.pack()
+
     count=0
     balance_total=0
-    print(" "*92+"-Balance- -Discount-")
+    T.insert(tk.END, " "*92+"-Balance- -Discount-"+'\n')
     for (name,id), info in acct_dict.items():
-            if name[0] in let1:
-                if (deptin == 0 or deptin == 1) and info[2][3] > 0:
-                    A0 = Dept1Account(1, name, id, info[0], info[1], info[2][1])
-                    print(A0)
-                    balance_total += info[2][1]
-                if (deptin == 0 or deptin == 2) and info[3][3] > 0:
-                    A0 = Dept2Account(2, name, id, info[0], info[1], info[3][1])
-                    print(A0)
-                    balance_total += info[3][1]
-                if (deptin == 0 or deptin == 3) and info[4][3] > 0:
-                    A0 = Dept3Account(3, name, id, info[0], info[1], info[4][1])         
-                    print(A0)
-                    balance_total += info[4][1]
-                
-            count+=1
+        if name[0] in let1:
+            if (deptin == 0 or deptin == 1) and info[2][3] > 0:
+                A0 = Dept1Account(1, name, id, info[0], info[1], info[2][1])
+                T.insert(tk.END, A0)
+                T.insert(tk.END,'\n')
+                balance_total += info[2][1]
+            if (deptin == 0 or deptin == 2) and info[3][3] > 0:
+                A0 = Dept2Account(2, name, id, info[0], info[1], info[3][1])
+                T.insert(tk.END, A0)
+                T.insert(tk.END,'\n')
+                balance_total += info[3][1]
+            if (deptin == 0 or deptin == 3) and info[4][3] > 0:
+                A0 = Dept3Account(3, name, id, info[0], info[1], info[4][1])         
+                T.insert(tk.END, A0)
+                T.insert(tk.END,'\n')
+                balance_total += info[4][1]         
+        count+=1
 
-    print("--------------")
+    T.insert(tk.END, "-------------- \n")
     if surnames1 == 'All': 
-        print("Total accounts:", count," "*55,"Total of balances:", round(balance_total,2))
+        pstr = "Total accounts:"+str(count)+" "*63+"Balance Total:"+str(round(balance_total,2))+"\n"
+        T.insert(tk.END, pstr)
     else:
-        print("Total accounts:", count)
-    print()
+        pstr = "Total accounts:"+str(count)+"\n"
+        T.insert(tk.END, pstr)
+    tk.mainloop()
 
 
 
