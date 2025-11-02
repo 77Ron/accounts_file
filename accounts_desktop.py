@@ -20,8 +20,8 @@ root.title("Account Balance File")
 
 Style().configure('Acct.TFrame', background=bgcol, foreground = 'black')
 
-label = ttk.Label(root, text=company_name+" Account Balances", font=('centaur', 28, 'bold'),
-                   foreground="white smoke", background="gray25") 
+label = ttk.Label(root, text=company_name+" Accounts Update", font=('centaur', 21, 'bold'),
+                   foreground="gray25", background="white smoke") 
 label.pack() 
 
 frame = ttk.Frame(root, style='Acct.TFrame', width = '400p', height = '500p')

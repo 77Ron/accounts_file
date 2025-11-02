@@ -26,7 +26,7 @@ def main():
                 f.write(uname + " logged in " + str(datetime.now())+ " - ")
             UpdateDictFile()
             with open("accts1", "a") as f:
-                f.write(uname + " saved changes " + str(datetime.now())+ " | ")
+                f.write(uname + " saved changes " + str(datetime.now())+ " \n ")
 
         elif fl1 == 'P':
             PrintDictFile()
@@ -47,12 +47,7 @@ def main():
             print("Option not avaiable yet.") 
         
         elif fl1 == 'L':
-            try:
-                with open("accts1", "r") as f:
-                    for line1 in f:
-                        print(line1)
-            except Exception:
-                print("Login file does not exist or cannot be opened.")
+            LogFile()
    
         elif fl1 == 'Reformat':
             ReformatDictFile()

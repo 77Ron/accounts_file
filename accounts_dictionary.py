@@ -283,6 +283,31 @@ def GraphDictFile():
     plt.gca().xaxis.set_major_formatter(StrMethodFormatter('{x:,.2f}'))
     plt.show()
 
+def LogFile():
+
+    try:
+        with open("accts1", "r") as f:
+
+            root = tk.Tk() 
+            root.title("Login File")
+            root.geometry("900x500")
+            T = tk.Text(root, height = 700, width = 900, bg="white smoke")
+            l = Label(root, text = "Login Records")
+            l.config(font =("courier", 17))
+            l.pack()
+            T.pack()
+  
+            for line1 in f:
+                #print(line1)
+                T.insert(tk.END, line1)
+            
+            tk.mainloop()
+            return
+
+    except Exception:
+        print("Login file does not exist or cannot be opened.")
+        return
+    
 
 def ReformatDictFile():
 
