@@ -22,3 +22,4 @@ d3rng = 50.00
 
 #Preferences---------
 bgcol = 'PaleTurquoise3'
+btcol = 'light blue3'
