@@ -21,7 +21,8 @@ root = tk.Tk()
 
 root.title("Account Balance File")
 
-Style().configure('Acct.TFrame', background=bgcol, foreground = 'black')
+s = Style()
+s.configure('Acct.TFrame', background=bgcol, foreground = 'black')
 
 label = ttk.Label(root, text=company_name+" Accounts Update", font=('centaur', 21, 'bold'),
                    foreground="gray25", background="white smoke") 

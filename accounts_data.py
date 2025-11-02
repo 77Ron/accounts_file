@@ -17,7 +17,8 @@ def main():
 
     root = tk.Tk() 
     root.title(company_name)
-    Style().configure('Menu.TFrame', background=bgcol, foreground = 'black')
+    s = Style()
+    s.configure('Menu.TFrame', background=bgcol, foreground = 'black')
     label = ttk.Label(root, text = "Main Menu ", font=('centaur', 21, 'bold'),
                     foreground="gray25", background="white smoke") 
     label.pack() 
