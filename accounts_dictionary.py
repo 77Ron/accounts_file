@@ -220,10 +220,10 @@ def PrintDictFile():
 
     T.insert(tk.END, "-------------- \n")
     if surnames1 == 'All': 
-        pstr = "Total accounts:"+str(count)+" "*63+"Balance Total:"+str(round(balance_total,2))+"\n"
+        pstr = "Total accounts: "+str(count)+" "*61+"Balance Total: "+str(round(balance_total,2))+"\n"
         T.insert(tk.END, pstr)
     else:
-        pstr = "Total accounts:"+str(count)+"\n"
+        pstr = "Total accounts: "+str(count)+"\n"
         T.insert(tk.END, pstr)
     
     tk.mainloop()

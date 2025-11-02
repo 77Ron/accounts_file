@@ -10,12 +10,13 @@
 
 
 from accounts_dictionary import *
+from company_settings import *
 
 
 def main():
 
     root = tk.Tk() 
-    root.title("Accounts File "+company_name)
+    root.title(company_name)
     Style().configure('Menu.TFrame', background=bgcol, foreground = 'black')
     label = ttk.Label(root, text = "Main Menu ", font=('centaur', 21, 'bold'),
                     foreground="gray25", background="white smoke") 
@@ -39,8 +40,10 @@ def main():
     M4_btn.place(x=30, y=250)
     M5_btn = tk.Button(root,text = 'Print Log File', command = LogFile, width = 20, font=('calibre', 10, 'bold'), bg=btcol, fg='black')
     M5_btn.place(x=30, y=280)
-    M6_btn = tk.Button(root,text = 'Exit', command = lambda: exit(), width = 20, font=('calibre', 10, 'bold'), bg=btcol, fg='black')
+    M6_btn = tk.Button(root,text = 'Settings', command = Settings, width = 20, font=('calibre', 10, 'bold'), bg=btcol, fg='black')
     M6_btn.place(x=30, y=310)
+    M7_btn = tk.Button(root,text = 'Exit', command = lambda: exit(), width = 20, font=('calibre', 10, 'bold'), bg=btcol, fg='black')
+    M7_btn.place(x=30, y=340)
 
     root.mainloop()
 
