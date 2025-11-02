@@ -38,6 +38,10 @@ def LoadDictFile():
 
 def UpdateDictFile():
 
+    uname = input("Enter username: ")
+    with open("accts1", "a") as f:
+        f.write(uname + " logged in " + str(datetime.now())+ " - ")
+
     acct_dict = LoadDictFile()
 
     while True:
@@ -143,6 +147,9 @@ def UpdateDictFile():
             f2 = open("accts2", "wb")
             pickle.dump(acct_dict, f2)
             f2.close()
+            with open("accts1", "a") as f:
+                f.write(uname + " saved changes " + str(datetime.now())+ " \n ")
+
             return
 
 
@@ -282,6 +289,17 @@ def GraphDictFile():
     plt.gca().yaxis.set_major_formatter(StrMethodFormatter('{x:,.2f}'))
     plt.gca().xaxis.set_major_formatter(StrMethodFormatter('{x:,.2f}'))
     plt.show()
+
+
+def DatabaseUpdate():
+    print("Option not avaiable yet.")
+
+def DatabaseImport():
+    print("Option not avaiable yet.")
+
+def TextFileImport():
+    print("Option not avaiable yet.")
+
 
 def LogFile():
 

@@ -80,11 +80,11 @@ ecode_label.place(x=50, y=270)
 ecode_entry.place(x=130, y=270)
 
 #----Department--------
-dept_btn = tk.Button(root,text = '1 '+ dept1, command = dept(1), font=('calibre', 9, 'bold'), bg=btcol, fg='black')
+dept_btn = tk.Button(root, text = '1 '+ dept1, command = dept(1), font=('calibre', 9, 'bold'), bg=btcol, fg='black')
 dept_btn.place(x=25, y=320)
-dept_btn = tk.Button(root,text = '2 ' +dept2, command = dept(2),  font=('calibre', 9, 'bold'), bg=btcol, fg='black')
+dept_btn = tk.Button(root, text = '2 ' +dept2, command = dept(2),  font=('calibre', 9, 'bold'), bg=btcol, fg='black')
 dept_btn.place(x=47+len(dept1)*10, y=320)
-dept_btn = tk.Button(root,text = '3 '+dept3, command = dept(3),  font=('calibre', 9, 'bold'), bg=btcol, fg='black')
+dept_btn = tk.Button(root, text = '3 '+dept3, command = dept(3),  font=('calibre', 9, 'bold'), bg=btcol, fg='black')
 dept_btn.place(x=55+len(dept1)*10+len(dept2)*10, y=320)
 
 #---Save----
