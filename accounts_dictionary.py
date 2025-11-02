@@ -163,9 +163,10 @@ def PrintDictFile():
             continue
         break
 
-    let0 = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
+    let0 = ['A','B','C','D','E','F','G','H','I','J','K','L','M',
+            'N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
     
-    surnames1 = input("Enter surname first letters separated by commas, or press Enter for All: ").upper().strip()
+    surnames1 = input("Enter surname initials separated by commas, or press Enter for All: ").upper().strip()
     
     if surnames1 == "":
         surnames1 = 'All'
@@ -217,14 +218,13 @@ def PrintDictFile():
     else:
         pstr = "Total accounts:"+str(count)+"\n"
         T.insert(tk.END, pstr)
+    
     tk.mainloop()
 
 
 
 def TableDictFile():
 
-    acct_dict = LoadDictFile()
-  
     while True:
         try:
             edept = int(input("Department: "))
@@ -235,13 +235,25 @@ def TableDictFile():
             print("Department must be numeric.")
             continue
         break
-    
+
+    acct_dict = LoadDictFile()
+
+    root = tk.Tk() 
+    root.title("Account Balance File")
+    root.geometry("900x500")
+    T = tk.Text(root, height = 700, width = 900, bg=bgcol)
+    l = Label(root, text = "Accounts Table")
+    l.config(font =("centaur", 22))
+    l.pack()
+    T.pack()
+  
     df = pd.DataFrame({key: pd.Series(val[edept+1], index=['Dept','Balance','Discount','Created','Last Updated']) for key, val in acct_dict.items()})
     dft = df.transpose()
     #df.style.set_properties(**{'text-align': 'left'}) ---- Requires install.
     #pd.options.display.float_format = '{:.2f}'.format
-    print(dft)
-    
+    T.insert(tk.END, dft)
+
+    tk.mainloop()
 
 def GraphDictFile():
 
