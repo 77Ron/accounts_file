@@ -13,7 +13,7 @@ from accounts_dictionary import *
 from company_settings import *
 
 def Menu(root, text1, command1, y1):
-    M1_btn = tk.Button(root, text = text1,command = command1, width = 20, font=('calibre', 10, 'bold'), bg=btcol, fg='black')
+    M1_btn = tk.Button(root, text = text1, command = command1, width = 20, font=('calibre', 10, 'bold'), bg=btcol, fg='black')
     M1_btn.place(x=27, y=y1)
 
 def main():

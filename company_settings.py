@@ -6,13 +6,11 @@ from accounts_dictionary import *
 def Settings():
     
     root = tk.Tk() 
-
     root.title(company_name)
     s = Style()
     s.configure('Settings.TFrame', background = bgcol, foreground = 'black')
     #s = Style()
     #s.configure('TNotebook.Tab', font=('centaur','21','bold') )
-
     label = ttk.Label(root, text=company_name+" Settings", font=('centaur', 21, 'bold'),
                    foreground="gray25", background='white smoke') 
     label.pack() 
