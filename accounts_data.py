@@ -12,6 +12,9 @@
 from accounts_dictionary import *
 from company_settings import *
 
+def Menu(root, text1, command1, y1):
+    M1_btn = tk.Button(root, text = text1,command = command1, width = 20, font=('calibre', 10, 'bold'), bg=btcol, fg='black')
+    M1_btn.place(x=27, y=y1)
 
 def main():
 
@@ -19,33 +22,22 @@ def main():
     root.title(company_name)
     s = Style()
     s.configure('Menu.TFrame', background=bgcol, foreground = 'black')
-    label = ttk.Label(root, text = "Main Menu ", font=('centaur', 21, 'bold'),
-                    foreground="gray25", background="white smoke") 
+    label = ttk.Label(root, text = "Main Menu", font=('centaur', 21, 'bold'), foreground="gray25", background="white smoke") 
     label.pack() 
-    frame = ttk.Frame(root, style='Menu.TFrame', width = '200p', height = '500p')
+    frame = ttk.Frame(root, style='Menu.TFrame', width = '170p', height = '500p')
     frame.pack()
 
-    M1_btn = tk.Button(root,text = 'Update Accounts',command = UpdateDictFile, width = 20, font=('calibre', 10, 'bold'), bg=btcol, fg='black')
-    M1_btn.place(x=30, y=70)
-    M2_btn = tk.Button(root,text = 'Print Accounts', command = PrintDictFile, width = 20, font=('calibre', 10, 'bold'), bg=btcol, fg='black')
-    M2_btn.place(x=30, y=100)
-    M3_btn = tk.Button(root,text = 'Display Table', command = TableDictFile, width = 20, font=('calibre', 10, 'bold'), bg=btcol, fg='black')
-    M3_btn.place(x=30, y=130)
-    M4_btn = tk.Button(root,text = 'Display Graph', command = GraphDictFile, width = 20, font=('calibre', 10, 'bold'), bg=btcol, fg='black')
-    M4_btn.place(x=30, y=160)
-    M4_btn = tk.Button(root,text = 'Database Update', command = DatabaseUpdate, width = 20, font=('calibre', 10, 'bold'), bg=btcol, fg='black')
-    M4_btn.place(x=30, y=190)
-    M4_btn = tk.Button(root,text = 'Database Import', command = DatabaseImport, width = 20, font=('calibre', 10, 'bold'), bg=btcol, fg='black')
-    M4_btn.place(x=30, y=220)
-    M4_btn = tk.Button(root,text = 'Text File Import', command = TextFileImport, width = 20, font=('calibre', 10, 'bold'), bg=btcol, fg='black')
-    M4_btn.place(x=30, y=250)
-    M5_btn = tk.Button(root,text = 'Print Log File', command = LogFile, width = 20, font=('calibre', 10, 'bold'), bg=btcol, fg='black')
-    M5_btn.place(x=30, y=280)
-    M6_btn = tk.Button(root,text = 'Settings', command = Settings, width = 20, font=('calibre', 10, 'bold'), bg=btcol, fg='black')
-    M6_btn.place(x=30, y=310)
-    M7_btn = tk.Button(root,text = 'Exit', command = lambda: exit(), width = 20, font=('calibre', 10, 'bold'), bg=btcol, fg='black')
-    M7_btn.place(x=30, y=340)
-
+    Menu(root, 'Update Accounts', UpdateDictFile, 70)
+    Menu(root, 'Print Accounts', PrintDictFile, 100)
+    Menu(root, 'Display Table', TableDictFile, 130)
+    Menu(root, 'Display Graph', GraphDictFile, 160)
+    Menu(root, 'Database Update', DatabaseUpdate, 190)
+    Menu(root, 'Database Import', DatabaseImport, 220)
+    Menu(root, 'Text File Import', TextFileImport, 250)
+    Menu(root, 'Print Log File', LogFile, 280)
+    Menu(root, 'Settings', Settings, 310)
+    Menu(root, 'Exit', lambda: exit(), 340)
+   
     root.mainloop()
 
     """
