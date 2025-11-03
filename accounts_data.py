@@ -14,7 +14,8 @@ from company_settings import *
 from company_calendar import *
 
 def Menu(root, text1, command1, y1):
-    M1_btn = tk.Button(root, text = text1, command = command1, width = 20, font=('calibre', 10, 'bold'), bg=btcol, fg='black')
+    M1_btn = tk.Button(root, text = text1, command = command1, width = 20, 
+                       font=('calibre', 10, 'bold'), bg=btcol, fg='black')
     M1_btn.place(x=27, y=y1)
 
 def main():
@@ -25,8 +26,8 @@ def main():
     s.configure('Menu.TFrame', background=bgcol, foreground = 'black')
     label = ttk.Label(root, text = "Main Menu", font=('centaur', 21, 'bold'), foreground="gray25", background="white smoke") 
     label.pack() 
-    frame = ttk.Frame(root, style='Menu.TFrame', width = '170p', height = '500p')
-    frame.pack()
+    menu_frame = ttk.Frame(root, style='Menu.TFrame', width = '170p', height = '500p')
+    menu_frame.pack(expand=True, fill= 'both')
 
     Menu(root, 'Update Accounts', UpdateDictFile, 70)
     Menu(root, 'Print Accounts', PrintDictFile, 100)

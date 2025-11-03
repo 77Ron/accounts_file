@@ -248,17 +248,17 @@ def TableDictFile():
     root = tk.Tk() 
     root.title("Account Balance File")
     root.geometry("900x500")
-    T = tk.Text(root, height = 700, width = 900, bg=bgcol)
-    l = Label(root, text = "Accounts Table")
-    l.config(font =("centaur", 22))
-    l.pack()
-    T.pack()
-  
+    text = tk.Text(root, height = 500, width = 700, bg=bgcol)
+    label = Label(root, text = "Accounts Table")
+    label.config(font =("centaur", 22))
+    label.pack()
+    text.pack()
+
     df = pd.DataFrame({key: pd.Series(val[edept+1], index=['Dept','Balance','Discount','Created','Last Updated']) for key, val in acct_dict.items()})
     dft = df.transpose()
     #df.style.set_properties(**{'text-align': 'left'}) ---- Requires install.
     #pd.options.display.float_format = '{:.2f}'.format
-    T.insert(tk.END, dft)
+    text.insert(tk.END, dft)
 
     tk.mainloop()
 
