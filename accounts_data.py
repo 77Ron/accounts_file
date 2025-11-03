@@ -11,6 +11,7 @@
 
 from accounts_dictionary import *
 from company_settings import *
+from company_calendar import *
 
 def Menu(root, text1, command1, y1):
     M1_btn = tk.Button(root, text = text1, command = command1, width = 20, font=('calibre', 10, 'bold'), bg=btcol, fg='black')
@@ -34,9 +35,10 @@ def main():
     Menu(root, 'Database Update', DatabaseUpdate, 190)
     Menu(root, 'Database Import', DatabaseImport, 220)
     Menu(root, 'Text File Import', TextFileImport, 250)
-    Menu(root, 'Print Log File', LogFile, 280)
-    Menu(root, 'Settings', Settings, 310)
-    Menu(root, 'Exit', lambda: exit(), 340)
+    Menu(root, 'Calendar', CalendarView, 280)
+    Menu(root, 'Print Log File', LogFile, 310)
+    Menu(root, 'Settings', Settings, 340)
+    Menu(root, 'Exit', lambda: exit(), 370)
    
     root.mainloop()
 
