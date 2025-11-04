@@ -11,6 +11,7 @@ import tkinter as tk
 from tkinter import ttk
 from tkinter.ttk import *
     
+
 def LoadDictFile():
 
     while True:
@@ -187,7 +188,7 @@ def PrintDictFile():
     
     #Print currently recalculates discount.
 
-    root = tk.Tk() 
+    root = tk.Toplevel() 
     root.title("Account Balance File")
     root.geometry("900x500")
     T = tk.Text(root, height = 700, width = 900)
@@ -225,8 +226,6 @@ def PrintDictFile():
     else:
         pstr = "Total accounts: "+str(count)+"\n"
         T.insert(tk.END, pstr)
-    
-    tk.mainloop()
 
 
 
@@ -245,7 +244,7 @@ def TableDictFile():
 
     acct_dict = LoadDictFile()
 
-    root = tk.Tk() 
+    root = tk.Toplevel() 
     root.title("Account Balance File")
     root.geometry("900x500")
     text = tk.Text(root, height = 500, width = 700, bg=bgcol)
@@ -260,7 +259,6 @@ def TableDictFile():
     #pd.options.display.float_format = '{:.2f}'.format
     text.insert(tk.END, dft)
 
-    tk.mainloop()
 
 def GraphDictFile():
 
@@ -306,7 +304,7 @@ def LogFile():
     try:
         with open("accts1", "r") as f:
 
-            root = tk.Tk() 
+            root = tk.Toplevel() 
             root.title("Login File")
             root.geometry("900x500")
             T = tk.Text(root, height = 700, width = 900, bg="white smoke")
@@ -319,7 +317,6 @@ def LogFile():
                 #print(line1)
                 T.insert(tk.END, line1)
             
-            tk.mainloop()
             return
 
     except Exception:

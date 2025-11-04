@@ -47,9 +47,10 @@ def dept(dp1, button1, button2, button3, estndchrg_v, esdiscnt_v, estot_v):
     estndchrg_v.set(stnd)
     esdiscnt_v.set(disc_amount)
     estot_v.set(stnd-disc_amount)
+   
 
 def UpdateAccounts():
-    root = tk.Tk() 
+    root = tk.Toplevel() 
 
     root.title("Account Balance File")
 
@@ -79,6 +80,7 @@ def UpdateAccounts():
     estndchrg_v = tk.DoubleVar()
     eothrchrg_v = tk.DoubleVar()
     epayment_v = tk.DoubleVar()
+    erefund_v = tk.DoubleVar()
 
     esdiscnt_v = tk.DoubleVar()
     eodiscnt_v = tk.DoubleVar()
@@ -163,23 +165,27 @@ def UpdateAccounts():
                           font=('garamond', 12, 'bold'), bg=btcol, fg='black')
     dept3_btn.place(x=50+len(dept1)*10+len(dept2)*10, y=370)
 
-    etr_label = tk.Label(root, text = 'Standard Charge'+' '*10+'Other Charges'+' '*25+'Payment' , font=('garamond', 13, 'bold'), bg=bgcol)
+    etr_label = tk.Label(root, text = 'Standard Charge'+' '*10+'Other Charges'+' '*12+'Payment'+' '*15+'Refund', font=('garamond', 13, 'bold'), bg=bgcol)
     etr_label.place(x=18, y=410)
 
 
  
-    estndchrg_entry = tk.Entry(root,textvariable = estndchrg_v, font=('calibre',10,'normal'), width=10)
+    estndchrg_entry = tk.Entry(root, textvariable = estndchrg_v, font=('calibre',10,'normal'), width=10)
     estndchrg_entry.place(x=21, y=440)
 
-    eothrchrg_entry = tk.Entry(root,textvariable = eothrchrg_v, font=('calibre',10,'normal'), width=10)
+    eothrchrg_entry = tk.Entry(root, textvariable = eothrchrg_v, font=('calibre',10,'normal'), width=10)
     eothrchrg_entry.place(x=180, y=440)
 
-    epayment_entry = tk.Entry(root,textvariable = epayment_v, font=('calibre',10,'normal'), width=10)
-    epayment_entry.place(x=385, y=440)
+    epayment_entry = tk.Entry(root, textvariable = epayment_v, font=('calibre',10,'normal'), width=10)
+    epayment_entry.place(x=330, y=440)
+
+    erefund_entry = tk.Entry(root, textvariable = erefund_v, font=('calibre',10,'normal'), width=10)
+    erefund_entry.place(x=453, y=440)
+
 
     esdiscnt_label = tk.Label(root, text = 'Discount', font=('garamond', 11, 'bold'), bg=bgcol)
     esdiscnt_label.place(x=18, y=468)
-    esdiscnt_entry = tk.Entry(root,textvariable = esdiscnt_v, font=('calibre',10,'normal'), width=10)
+    esdiscnt_entry = tk.Entry(root, textvariable = esdiscnt_v, font=('calibre',10,'normal'), width=10)
     esdiscnt_entry.place(x=21, y=490)
 
     eodiscnt_label = tk.Label(root, text = 'Discount', font=('garamond', 11, 'bold'), bg=bgcol)
@@ -189,12 +195,12 @@ def UpdateAccounts():
 
     estax_label = tk.Label(root, text = 'Tax', font=('garamond', 11, 'bold'), bg=bgcol)
     estax_label.place(x=18, y=513)
-    estax_entry = tk.Entry(root,textvariable = estax_v, font=('calibre',10,'normal'), width=10)
+    estax_entry = tk.Entry(root, textvariable = estax_v, font=('calibre',10,'normal'), width=10)
     estax_entry.place(x=21, y=535)
 
     eotax_label = tk.Label(root, text = 'Tax', font=('garamond', 11, 'bold'), bg=bgcol)
     eotax_label.place(x=177, y=513)
-    eotax_entry = tk.Entry(root,textvariable = eotax_v, font=('calibre',10,'normal'), width=10)
+    eotax_entry = tk.Entry(root, textvariable = eotax_v, font=('calibre',10,'normal'), width=10)
     eotax_entry.place(x=180, y=535)
 
     estot_label = tk.Label(root, text = 'Total', font=('garamond', 11, 'bold'), bg=bgcol)
@@ -209,10 +215,8 @@ def UpdateAccounts():
                            font=('calibre',10,'normal'), width=10)
     eotax_entry.place(x=180, y=580)
 
-
-
     etrc_label = tk.Label(root, text = 'Transaction Comments:', font=('calibre',10, 'bold'), bg=bgcol)
-    etrc_entry = tk.Entry(root,textvariable = etrc_v, font=('calibre',10,'normal'), width=75)
+    etrc_entry = tk.Entry(root, textvariable = etrc_v, font=('calibre',10,'normal'), width=75)
     etrc_label.place(x=10, y=605)
     etrc_entry.place(x=10, y=630)
 
@@ -220,7 +224,3 @@ def UpdateAccounts():
     save_btn = tk.Button(root,text = 'Save Updates', command = lambda: save(name_v), font=('garamond', 12, 'bold'), bg=btcol, fg='black')
     save_btn.place(x=330, y=680)
 
-
-    root.mainloop()
-
-UpdateAccounts()

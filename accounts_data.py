@@ -8,10 +8,13 @@
 # Import accounts from a MySQL database.
 # Import accounts from a text file.
 
-
+import tkinter as tk
+from tkinter import ttk
+from tkinter.ttk import *
+from accounts_desktop import *
 from accounts_dictionary import *
-from company_settings import *
 from company_calendar import *
+from company_settings import *
 
 def Menu(root, text1, command1, y1):
     M1_btn = tk.Button(root, text = text1, command = command1, width = 20, 
@@ -29,7 +32,8 @@ def main():
     menu_frame = ttk.Frame(root, style='Menu.TFrame', width = '170p', height = '500p')
     menu_frame.pack(expand=True, fill= 'both')
 
-    Menu(root, 'Update Accounts', UpdateDictFile, 70)
+    
+    Menu(root, 'Update Accounts', UpdateAccounts, 70)
     Menu(root, 'Print Accounts', PrintDictFile, 100)
     Menu(root, 'Display Table', TableDictFile, 130)
     Menu(root, 'Display Graph', GraphDictFile, 160)
@@ -43,7 +47,8 @@ def main():
     Menu(root, 'Print Log File', LogFile, 310)
     Menu(root, 'Settings', Settings, 340)
     Menu(root, 'Exit', lambda: exit(), 370)
-   
+    Menu(root, 'Update Accounts (temp)', UpdateDictFile, 430)
+
     root.mainloop()
 
     """
