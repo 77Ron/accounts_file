@@ -22,7 +22,7 @@ def dept(dp1, button1, button2, button3, estndchrg_v):
         stnd=stnrd_fee1
     elif dept == 2:
         stnd=stnrd_fee2
-    elif dept ==3:       
+    elif dept == 3:       
         stnd=stnrd_fee3
 
     estndchrg_v.set(stnd)
@@ -58,6 +58,12 @@ def UpdateAccounts():
     estndchrg_v = tk.DoubleVar()
     eothrchrg_v = tk.DoubleVar()
     epayment_v = tk.DoubleVar()
+
+    esdiscnt_v = tk.DoubleVar()
+    eodiscnt_v = tk.DoubleVar()
+
+    estax_v = tk.DoubleVar()
+    eotax_v = tk.DoubleVar()
     
 
     uname_label = tk.Label(root, text = 'Username:', font=('calibre',10, 'bold'), bg=bgcol)
@@ -136,7 +142,7 @@ def UpdateAccounts():
     dept3_btn.place(x=50+len(dept1)*10+len(dept2)*10, y=370)
 
     etr_label = tk.Label(root, text = 'Standard Charge'+' '*10+'Other Charges'+' '*25+'Payment' , font=('garamond', 13, 'bold'), bg=bgcol)
-    etr_label.place(x=20, y=410)
+    etr_label.place(x=18, y=410)
 
 
  
@@ -148,6 +154,26 @@ def UpdateAccounts():
 
     epayment_entry = tk.Entry(root,textvariable = epayment_v, font=('calibre',10,'normal'), width=10)
     epayment_entry.place(x=385, y=440)
+
+    esdiscnt_label = tk.Label(root, text = 'Discount', font=('garamond', 11, 'bold'), bg=bgcol)
+    esdiscnt_label.place(x=18, y=468)
+    esdiscnt_entry = tk.Entry(root,textvariable = esdiscnt_v, font=('calibre',10,'normal'), width=10)
+    esdiscnt_entry.place(x=21, y=490)
+
+    eodiscnt_label = tk.Label(root, text = 'Discount', font=('garamond', 11, 'bold'), bg=bgcol)
+    eodiscnt_label.place(x=177, y=468)
+    eodiscnt_entry = tk.Entry(root,textvariable = eodiscnt_v, font=('calibre',10,'normal'), width=10)
+    eodiscnt_entry.place(x=180, y=490)
+
+    estax_label = tk.Label(root, text = 'Tax', font=('garamond', 11, 'bold'), bg=bgcol)
+    estax_label.place(x=18, y=513)
+    estax_entry = tk.Entry(root,textvariable = estax_v, font=('calibre',10,'normal'), width=10)
+    estax_entry.place(x=21, y=535)
+
+    eotax_label = tk.Label(root, text = 'Tax', font=('garamond', 11, 'bold'), bg=bgcol)
+    eotax_label.place(x=177, y=513)
+    eotax_entry = tk.Entry(root,textvariable = eotax_v, font=('calibre',10,'normal'), width=10)
+    eotax_entry.place(x=180, y=535)
 
 
 
