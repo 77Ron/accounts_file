@@ -1,9 +1,9 @@
 #Company information.
 
 company_name = "RXX100"
+acct_number_prefix = "RXA"
 
 #Department settings
-
 
 #-----------Dept 1-------------
 dept1 = "Repairs"

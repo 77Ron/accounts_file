@@ -12,7 +12,7 @@ def save(name_v):
     print("Username is: " + name)
     name_v.set("")
 
-def dept(dp1, button1, button2, button3, estndchrg_v, esdiscnt_v):
+def dept(dp1, button1, button2, button3, estndchrg_v, esdiscnt_v, estot_v):
     dept=dp1
     button1.configure(bg='SteelBlue3')
     button2.configure(bg=btcol)
@@ -46,6 +46,7 @@ def dept(dp1, button1, button2, button3, estndchrg_v, esdiscnt_v):
 
     estndchrg_v.set(stnd)
     esdiscnt_v.set(disc_amount)
+    estot_v.set(stnd-disc_amount)
 
 def UpdateAccounts():
     root = tk.Tk() 
@@ -81,9 +82,10 @@ def UpdateAccounts():
 
     esdiscnt_v = tk.DoubleVar()
     eodiscnt_v = tk.DoubleVar()
-
     estax_v = tk.DoubleVar()
     eotax_v = tk.DoubleVar()
+    estot_v = tk.DoubleVar()
+    eotot_v = tk.DoubleVar()
     
 
     uname_label = tk.Label(root, text = 'Username:', font=('calibre',10, 'bold'), bg=bgcol)
@@ -93,10 +95,10 @@ def UpdateAccounts():
 
     #-------Customer-------
 
-    eid_label = tk.Label(root, text = 'ID/Account No.:', font=('calibre',10, 'bold'), bg=bgcol)
+    eid_label = tk.Label(root, text = 'ID/Account No.: '+ acct_number_prefix, font=('calibre',10, 'bold'), bg=bgcol)
     eid_entry = tk.Entry(root,textvariable = eid_v, font=('calibre',10,'normal'))
-    eid_label.place(x=222, y=105)
-    eid_entry.place(x=330, y=105)
+    eid_label.place(x=211, y=105)
+    eid_entry.place(x=345, y=105)
 
     ename_label = tk.Label(root, text = 'Customer Name:', font=('calibre',10, 'bold'), bg=bgcol)
     ename_entry = tk.Entry(root,textvariable = ename_v, font=('calibre',10,'normal'))
@@ -149,15 +151,15 @@ def UpdateAccounts():
     #----Transactions--------
 
     dept1_btn = tk.Button(root, text = '1 '+dept1, 
-                          command = lambda: dept(1, dept1_btn, dept2_btn, dept3_btn, estndchrg_v, esdiscnt_v), 
+                          command = lambda: dept(1, dept1_btn, dept2_btn, dept3_btn, estndchrg_v, esdiscnt_v, estot_v), 
                           font=('garamond', 12, 'bold'), bg=btcol, fg='black')
     dept1_btn.place(x=25, y=370)
     dept2_btn = tk.Button(root, text = '2 '+dept2,
-                          command = lambda: dept(2, dept2_btn, dept1_btn, dept3_btn, estndchrg_v, esdiscnt_v), 
+                          command = lambda: dept(2, dept2_btn, dept1_btn, dept3_btn, estndchrg_v, esdiscnt_v, estot_v), 
                           font=('garamond', 12, 'bold'), bg=btcol, fg='black')
     dept2_btn.place(x=40+len(dept1)*10, y=370)
     dept3_btn = tk.Button(root, text = '3 '+dept3, 
-                          command = lambda: dept(3, dept3_btn, dept1_btn, dept2_btn, estndchrg_v, esdiscnt_v), 
+                          command = lambda: dept(3, dept3_btn, dept1_btn, dept2_btn, estndchrg_v, esdiscnt_v, estot_v), 
                           font=('garamond', 12, 'bold'), bg=btcol, fg='black')
     dept3_btn.place(x=50+len(dept1)*10+len(dept2)*10, y=370)
 
@@ -194,6 +196,18 @@ def UpdateAccounts():
     eotax_label.place(x=177, y=513)
     eotax_entry = tk.Entry(root,textvariable = eotax_v, font=('calibre',10,'normal'), width=10)
     eotax_entry.place(x=180, y=535)
+
+    estot_label = tk.Label(root, text = 'Total', font=('garamond', 11, 'bold'), bg=bgcol)
+    estot_label.place(x=18, y=560)
+    estax_entry = tk.Entry(root, textvariable = estot_v, state='readonly',
+                           font=('calibre',10,'normal'), width=10)
+    estax_entry.place(x=21, y=580)
+
+    eotot_label = tk.Label(root, text = 'Total', font=('garamond', 11, 'bold'), bg=bgcol)
+    eotot_label.place(x=177, y=560)
+    eotax_entry = tk.Entry(root, textvariable = eotot_v, state='readonly',
+                           font=('calibre',10,'normal'), width=10)
+    eotax_entry.place(x=180, y=580)
 
 
 
