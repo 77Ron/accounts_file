@@ -12,20 +12,40 @@ def save(name_v):
     print("Username is: " + name)
     name_v.set("")
 
-def dept(dp1, button1, button2, button3, estndchrg_v):
+def dept(dp1, button1, button2, button3, estndchrg_v, esdiscnt_v):
     dept=dp1
     button1.configure(bg='SteelBlue3')
     button2.configure(bg=btcol)
     button3.configure(bg=btcol)
 
     if dept == 1:
-        stnd=stnrd_fee1
+        stnd = stnrd_fee1
+        disc = d1dc1
+        if stnd < 0:
+            disc = 0
+        if stnd > d1rng:
+            disc = d1dc2
     elif dept == 2:
-        stnd=stnrd_fee2
+        stnd = stnrd_fee2
+        disc = d2dc1
+        if stnd < 0:
+            disc = 0
+        if stnd > d2rng:
+            disc = d2dc2
     elif dept == 3:       
-        stnd=stnrd_fee3
+        stnd = stnrd_fee3
+        disc = d3dc1
+        if stnd < 0:
+            disc = 0
+        if stnd > d3rng:
+            disc = d3dc2
+
+    disc_amount = 0.0
+    if disc > 0: 
+        disc_amount = round(stnd * (disc/100), 2)
 
     estndchrg_v.set(stnd)
+    esdiscnt_v.set(disc_amount)
 
 def UpdateAccounts():
     root = tk.Tk() 
@@ -129,15 +149,15 @@ def UpdateAccounts():
     #----Transactions--------
 
     dept1_btn = tk.Button(root, text = '1 '+dept1, 
-                          command = lambda: dept(1, dept1_btn, dept2_btn, dept3_btn, estndchrg_v), 
+                          command = lambda: dept(1, dept1_btn, dept2_btn, dept3_btn, estndchrg_v, esdiscnt_v), 
                           font=('garamond', 12, 'bold'), bg=btcol, fg='black')
     dept1_btn.place(x=25, y=370)
     dept2_btn = tk.Button(root, text = '2 '+dept2,
-                          command = lambda: dept(2, dept2_btn, dept1_btn, dept3_btn, estndchrg_v), 
+                          command = lambda: dept(2, dept2_btn, dept1_btn, dept3_btn, estndchrg_v, esdiscnt_v), 
                           font=('garamond', 12, 'bold'), bg=btcol, fg='black')
     dept2_btn.place(x=40+len(dept1)*10, y=370)
     dept3_btn = tk.Button(root, text = '3 '+dept3, 
-                          command = lambda: dept(3, dept3_btn, dept1_btn, dept2_btn, estndchrg_v), 
+                          command = lambda: dept(3, dept3_btn, dept1_btn, dept2_btn, estndchrg_v, esdiscnt_v), 
                           font=('garamond', 12, 'bold'), bg=btcol, fg='black')
     dept3_btn.place(x=50+len(dept1)*10+len(dept2)*10, y=370)
 

@@ -21,7 +21,7 @@ hrly_rate2 = 'N'
 #Discount percentages and range
 d2dc1 = 0
 d2dc2 = 25
-d2rng = 100.00
+d2rng = 10.00
 
 #-----------Dept 3-------------
 dept3 = "Piano Lessons"
