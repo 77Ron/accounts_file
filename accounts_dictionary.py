@@ -2,6 +2,7 @@
 
 from datetime import datetime
 import pickle
+import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from matplotlib.ticker import StrMethodFormatter
@@ -230,7 +231,7 @@ def PrintDictFile():
 
 
 def TableDictFile():
-
+    
     while True:
         try:
             edept = int(input("Department: "))
@@ -258,11 +259,10 @@ def TableDictFile():
                                         for key, val in acct_dict.items()})
     
     dft = df.transpose()
-    #dft.style.format({'Last Updated':'{:%Y-%m-%d}'})
-    #df.style.set_properties(**{'text-align': 'left'}) ---- Requires install.
-    #pd.options.display.float_format = '{:.2f}'.format
-    
+    dft['Dept'] = dft['Dept'].map('{:.0f}'.format)
+    dft['Balance'] = dft['Balance'].map('£{:,.2f}'.format)
     text.insert(tk.END, dft)
+
 
 
 def GraphDictFile():
