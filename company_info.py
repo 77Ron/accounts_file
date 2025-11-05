@@ -36,3 +36,8 @@ d3rng = 50.00
 #Display Preferences---------
 bgcol = 'PaleTurquoise3'
 btcol = 'light blue3'
+
+
+#----------------------------------
+
+dept_name = [dept1,dept2,dept3]

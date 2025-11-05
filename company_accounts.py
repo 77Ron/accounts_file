@@ -8,6 +8,7 @@ class Account:
     
     def __init__(self, dept = 0, name= "-None-", id = 0, address = "-Blank-", p_code = "--- ---", balance = 0.00):
         self.dept = dept
+        self.deptname = dept_name[dept-1]
         self.name = name
         self.id = id
         self.address = address
@@ -22,7 +23,7 @@ class Dept1Account(Account):
 
     def __init__(self, dept = 1, name= "-None-", id = 0, address = "-Blank-", p_code = "--- ---", balance = 0.00):
         Account.__init__(self, dept, name, id, address, p_code, balance)
-        self.deptname = dept1
+      
         self.discnt = self.discount()
 
     def discount(self):
@@ -37,7 +38,7 @@ class Dept2Account(Account):
 
     def __init__(self, dept = 2, name= "-None-", id = 0, address = "-Blank-", p_code = "--- ---", balance = 0.00):
         Account.__init__(self, dept, name, id, address, p_code, balance)
-        self.deptname = dept2
+  
         self.discnt = self.discount()
     
     def discount(self):
@@ -52,7 +53,7 @@ class Dept3Account(Account):
 
     def __init__(self, dept = 3, name= "-None-", id = 0, address = "-Blank-", p_code = "--- ---", balance = 0.00):
         Account.__init__(self, dept, name, id, address, p_code, balance)
-        self.deptname = dept3
+ 
         self.discnt = self.discount()
 
     def discount(self):
