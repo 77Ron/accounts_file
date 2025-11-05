@@ -1,12 +1,5 @@
-# Write, update, and delete account info in a saved dictionary file.
-# Display file by department and surname initial.
-# Display account table with pandas.
-# Display account graph with matplotlib.
-# 
-# ------- Not available at this time. ----------
-# Create or update a MySQL database from the account dictionary file.
-# Import accounts from a MySQL database.
-# Import accounts from a text file.
+# Account maintenance, transactions, billing, and scheduling for
+# individual services providers.
 
 import tkinter as tk
 from tkinter import ttk
@@ -52,7 +45,7 @@ def main():
     root.mainloop()
 
     """
-        elif fl1 == 'Reformat':
+        if fl1 == 'Reformat':
             ReformatDictFile()
     """
     
