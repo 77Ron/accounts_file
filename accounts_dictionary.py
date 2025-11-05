@@ -253,10 +253,15 @@ def TableDictFile():
     label.pack()
     text.pack()
 
-    df = pd.DataFrame({key: pd.Series(val[edept+1], index=['Dept','Balance','Discount','Created','Last Updated']) for key, val in acct_dict.items()})
+    df = pd.DataFrame({key: pd.Series(val[edept+1], 
+                                      index=['Dept','Balance','Discount','Created','Last Updated'])
+                                        for key, val in acct_dict.items()})
+    
     dft = df.transpose()
+    #dft.style.format({'Last Updated':'{:%Y-%m-%d}'})
     #df.style.set_properties(**{'text-align': 'left'}) ---- Requires install.
     #pd.options.display.float_format = '{:.2f}'.format
+    
     text.insert(tk.END, dft)
 
 

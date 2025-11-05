@@ -1,6 +1,10 @@
 # Account maintenance, transactions, billing, and scheduling for
 # individual services providers.
 
+# Currently a WIP that stores dict files,
+# that will be relocated on a MySQL database.
+
+
 import tkinter as tk
 from tkinter import ttk
 from tkinter.ttk import *
