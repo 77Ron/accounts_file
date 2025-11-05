@@ -26,7 +26,8 @@ def main():
     s.configure('Menu.TFrame', background=bgcol, foreground = 'black')
     label = ttk.Label(root, text = "Main Menu", font=('centaur', 21, 'bold'), foreground="gray25", background="white smoke") 
     label.pack() 
-    menu_frame = ttk.Frame(root, style='Menu.TFrame', width = '170p', height = '500p')
+    #menu_frame = ttk.Frame(root, style='Menu.TFrame', width = '170p', height = '500p')
+    menu_frame = ttk.Frame(root, style='Menu.TFrame')
     menu_frame.pack(expand=True, fill= 'both')
 
     
@@ -45,6 +46,16 @@ def main():
     Menu(root, 'Settings', Settings, 340)
     Menu(root, 'Exit', lambda: exit(), 370)
     Menu(root, 'Update Accounts (temp)', UpdateDictFile, 430)
+
+    #---Set main menu window screen position
+    fw = 226
+    fh = 600
+    sw = root.winfo_screenwidth()
+    sh = root.winfo_screenheight()
+    xc = (sw/8) - (226/8)
+    yc = (sh/6) - (600/6)
+    root.geometry('%dx%d+%d+%d' % (fw, fh, xc, yc))
+
 
     root.mainloop()
 

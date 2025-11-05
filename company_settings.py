@@ -10,11 +10,20 @@ def Settings():
     root = tk.Toplevel() 
     root.title(company_name)
 
+    #---Set window screen position
+    fw = 550
+    fh = 700
+    sw = root.winfo_screenwidth()
+    sh = root.winfo_screenheight()
+    xc = (sw/2) - (550/2)
+    yc = (sh/6) - (600/6)
+    root.geometry('%dx%d+%d+%d' % (fw, fh, xc, yc))
+
     label = tk.Label(root, text=company_name+" Settings", font=('centaur', 21, 'bold'),
                    foreground="gray25", background='white smoke') 
     label.pack() 
 
-    tabControl = ttk.Notebook(root, width = '380p', height = '480p')
+    tabControl = ttk.Notebook(root, width = '550p', height = '600p')
     tab1 = tk.Frame(tabControl, background=bgcol)
     tab2 = tk.Frame(tabControl, background=bgcol)
     tab3 = tk.Frame(tabControl, background=bgcol)

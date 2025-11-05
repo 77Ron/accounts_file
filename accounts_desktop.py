@@ -51,7 +51,6 @@ def dept(dp1, button1, button2, button3, estndchrg_v, esdiscnt_v, estot_v):
 
 def UpdateAccounts():
     root = tk.Toplevel() 
-
     root.title("Account Balance File")
 
     label = tk.Label(root, text=company_name+" Accounts Update", font=('centaur', 21, 'bold'),
@@ -60,6 +59,16 @@ def UpdateAccounts():
 
     frame = tk.Frame(root, width = '550', height = '700', bg=bgcol)
     frame.pack()
+
+    #---Set window screen position
+    fw = 550
+    fh = 700
+    sw = root.winfo_screenwidth()
+    sh = root.winfo_screenheight()
+    xc = (sw/2) - (550/2)
+    yc = (sh/6) - (600/6)
+    root.geometry('%dx%d+%d+%d' % (fw, fh, xc, yc))
+
 
     #-------------------
 
