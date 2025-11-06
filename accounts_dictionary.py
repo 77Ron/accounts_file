@@ -266,33 +266,67 @@ def TableDictFile():
 
 def GraphDictFile():
 
-    while True:
-        try:
-            edept = int(input("Department: "))
-            if edept < 1 or edept > 3:
-                print("Department must be 1, 2, or 3.")
-                continue
-        except Exception:
-            print("Department must be numeric.")
-            continue
-        break
+    root = tk.Toplevel() 
+    root.title(company_name)
 
-    acct_dict = LoadDictFile()
+    label = tk.Label(root, text="Graph Criterea", font=('centaur', 21, 'bold'),
+                    foreground="gray25", background="white smoke") 
+    label.pack()
 
-    df = pd.DataFrame({key: pd.Series(val[edept+1], index=['Dept','Balance','Discount','Created','Last Updated']) for key, val in acct_dict.items()})
-    dft = df.transpose()
-    #df = pd.DataFrame.from_dict(acct_dict, orient='index', columns = ['-Address-','-Post Code-', '-Dept.-', '-Balance-', '-Discount-'])
-    plt.figure(figsize=(8,5), facecolor = 'paleturquoise')
-    #ax = plt.gca()
-    #ax.set_facecolor("white")
-    plt.grid(True)
-    plt.title(str(edept)+" "+dept_name[edept-1]+" - Balance vs Discount", fontsize = 15)
-    plt.xlabel("Discount", fontsize = 11)
-    plt.ylabel("Balance", fontsize = 11)
-    plt.bar(dft["Discount"].values, dft["Balance"].values, color = "black")
-    plt.gca().yaxis.set_major_formatter(StrMethodFormatter('{x:,.2f}'))
-    plt.gca().xaxis.set_major_formatter(StrMethodFormatter('{x:,.2f}'))
-    plt.show()
+    frame = tk.Frame(root, width = '550', height = '700', bg=bgcol)
+    frame.pack()
+
+    #---Set window screen position
+    fw = 550
+    fh = 600
+    sw = root.winfo_screenwidth()
+    sh = root.winfo_screenheight()
+    xc = (sw/2) - (fw/2)
+    yc = (sh/6) - (fh/6)
+    root.geometry('%dx%d+%d+%d' % (fw, fh, xc, yc))
+
+    esrv_v = tk.StringVar()
+
+    def service_ic(entry):
+          if entry.isdigit() == False:
+            return False
+          if int(entry) < 1 or int(entry) > 3:
+            return False
+          else:
+            return True
+    
+    service = root.register(service_ic)
+    usrv_label = tk.Label(root, text = 'Service Number:', font=('calibre',11, 'bold'), bg=bgcol)
+    usrv_entry = tk.Entry(root, textvariable = esrv_v, font=('calibre',11,'normal'), width=1,
+                          validate='key', validatecommand=(service, '%P'))
+    usrv_label.place(x=10, y=60)
+    usrv_entry.place(x=140, y=60)
+    
+
+    display_btn = tk.Button(root,text = 'Display Graph', command = lambda: GraphDisplay(esrv_v),
+                             font=('garamond', 12, 'bold'), bg=btcol, fg='black')
+    display_btn.place(x=330, y=380)
+
+    def GraphDisplay(esrv_v1):
+
+        edept = int(esrv_v1.get())
+
+        acct_dict = LoadDictFile()
+
+        df = pd.DataFrame({key: pd.Series(val[edept+1], index=['Dept','Balance','Discount','Created','Last Updated']) for key, val in acct_dict.items()})
+        dft = df.transpose()
+        #df = pd.DataFrame.from_dict(acct_dict, orient='index', columns = ['-Address-','-Post Code-', '-Dept.-', '-Balance-', '-Discount-'])
+        plt.figure(figsize=(8,5), facecolor = 'paleturquoise')
+        #ax = plt.gca()
+        #ax.set_facecolor("white")
+        plt.grid(True)
+        plt.title(str(edept)+" "+dept_name[edept-1]+" - Balance vs Discount", fontsize = 15)
+        plt.xlabel("Discount", fontsize = 11)
+        plt.ylabel("Balance", fontsize = 11)
+        plt.bar(dft["Discount"].values, dft["Balance"].values, color = "black")
+        plt.gca().yaxis.set_major_formatter(StrMethodFormatter('{x:,.2f}'))
+        plt.gca().xaxis.set_major_formatter(StrMethodFormatter('{x:,.2f}'))
+        plt.show()
 
 
 def DatabaseUpdate():

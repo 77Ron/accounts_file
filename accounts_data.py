@@ -33,8 +33,8 @@ def main():
     
     Menu(root, 'Update Accounts', UpdateAccounts, 70)
     Menu(root, 'Print Accounts', PrintDictFile, 100)
-    Menu(root, 'Display Table', TableDictFile, 130)
-    Menu(root, 'Display Graph', GraphDictFile, 160)
+    Menu(root, 'Table', TableDictFile, 130)
+    Menu(root, 'Graphs', GraphDictFile, 160)
     Menu(root, 'Database Update', DatabaseUpdate, 190)
     Menu(root, 'Database Import', DatabaseImport, 220)
     Menu(root, 'Text File Import', TextFileImport, 250)

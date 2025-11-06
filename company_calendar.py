@@ -27,7 +27,7 @@ def CalendarView():
 
     cal = Calendar(root, selectmode = 'day', year = 2025, month = 11, day = 22, 
                    background=bgcol, foreground='white smoke')
-    cal.pack(fill='both', expand=True, pady = 20)
+    cal.pack(fill='both', expand=True, padx= 75, pady = 75, anchor = 'n')
 
     Button(root, text = "Select Date", command = lambda: date.config(text= cal.get_date())).pack(pady = 20)
 
