@@ -50,7 +50,7 @@ def dept(dp1, button1, button2, button3, estndchrg_v, esdiscnt_v, estot_v):
    
 
 def UpdateAccounts():
-    root = tk.Toplevel() 
+    root = tk.Toplevel()
     root.title("Account Balance File")
 
     label = tk.Label(root, text=company_name+" Accounts Update", font=('centaur', 21, 'bold'),

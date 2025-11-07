@@ -373,16 +373,22 @@ def ReformatDictFile():
 
         d1 = datetime.now() #Consider using Julian date.
         d2 = int(d1.strftime("%Y%m%d"))
+        
+        account_temp = {(name, id):[info[0], " ", " ", info[1], " ", " ", "0.00", info[2], info[3], info[4]]}
+        #Put info[2-4] into transactions with only one acct rec., but leave service number and date.
+        #Transactions: id, trcode(str3), srvcdesc, amount[4 floats], date.
+        transaction_temp = {}
+
+        print(name, id, info[0], info[1])
+        acct_dict_temp.update(account_temp)
+
+        """
         newinfo = [1, 0.0, 0.0, 0, 0],[2, 0.0, 0.0, 0, 0],[3, 0.0, 0.0, 0, 0]
         newinfo[info[2]-1][1] = info[3]
         newinfo[info[2]-1][2] = info[4]
         newinfo[info[2]-1][3] = d2
         newinfo[info[2]-1][4] = d2
-
-        account_temp = {(name, id):[info[0], info[1], newinfo[0], newinfo[1], newinfo[2]]}
-        print(name, id, info[0], info[1], newinfo)
-        acct_dict_temp.update(account_temp)
-           
+        """
     f2 = open("accts_temp2", "wb")
     pickle.dump(acct_dict_temp, f2)
     f2.close()

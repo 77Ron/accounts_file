@@ -12,7 +12,7 @@ def Settings():
 
     #---Set window screen position
     fw = 550
-    fh = 700
+    fh = 600
     sw = root.winfo_screenwidth()
     sh = root.winfo_screenheight()
     xc = (sw/2) - (550/2)
