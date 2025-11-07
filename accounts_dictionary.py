@@ -230,38 +230,73 @@ def PrintDictFile():
 
 
 def TableDictFile():
-    
-    while True:
-        try:
-            edept = int(input("Department: "))
-            if edept < 1 or edept > 3:
-                print("Department must be 1, 2, or 3.")
-                continue
-        except Exception:
-            print("Department must be numeric.")
-            continue
-        break
-
-    acct_dict = LoadDictFile()
-
     root = tk.Toplevel() 
-    root.title("Account Balance File")
-    root.geometry("900x500")
-    text = tk.Text(root, height = 500, width = 700, bg=bgcol)
-    label = Label(root, text = "Accounts Table")
-    label.config(font =("centaur", 22))
+    root.title(company_name)
+
+    label = tk.Label(root, text="Table Selection", font=('centaur', 21, 'bold'),
+                    foreground="gray25", background="white smoke") 
     label.pack()
-    text.pack()
 
-    df = pd.DataFrame({key: pd.Series(val[edept+1], 
-                                      index=['Dept','Balance','Discount','Created','Last Updated'])
-                                        for key, val in acct_dict.items()})
-    
-    dft = df.transpose()
-    dft['Dept'] = dft['Dept'].map('{:.0f}'.format)
-    dft['Balance'] = dft['Balance'].map('£{:,.2f}'.format)
-    text.insert(tk.END, dft)
+    frame = tk.Frame(root, width = '550', height = '700', bg=bgcol)
+    frame.pack()
 
+    #---Set window screen position
+    fw = 550
+    fh = 600
+    sw = root.winfo_screenwidth()
+    sh = root.winfo_screenheight()
+    xc = (sw/2) - (fw/2)
+    yc = (sh/6) - (fh/6)
+    root.geometry('%dx%d+%d+%d' % (fw, fh, xc, yc))
+
+    srv1_v = tk.IntVar()
+    srv2_v = tk.IntVar()
+    srv3_v = tk.IntVar()
+
+    srv_ck1 = tk.Checkbutton(root, text=dept_name[0], font=('calibre',11, 'bold'), bg=bgcol,
+                             variable=srv1_v, onvalue=1, offvalue=0)
+    srv_ck1.place(x=20, y=100)
+    srv_ck2 = tk.Checkbutton(root, text=dept_name[1], font=('calibre',11, 'bold'), bg=bgcol,
+                             variable=srv2_v, onvalue=1, offvalue=0)
+    srv_ck2.place(x=20, y=130)
+    srv_ck3 = tk.Checkbutton(root, text=dept_name[2], font=('calibre',11, 'bold'), bg=bgcol,
+                             variable=srv3_v, onvalue=1, offvalue=0)
+    srv_ck3.place(x=20,y=160)
+
+    display_btn = tk.Button(root,text = 'Display Table', 
+                            command = lambda: TableDisplay(srv1_v, srv2_v, srv3_v),
+                             font=('garamond', 12, 'bold'), bg=btcol, fg='black')
+    display_btn.place(x=330, y=380)
+
+    def TableDisplay(srv1_v1, srv2_v1, srv3_v1):
+        
+        srv1_v2 = srv1_v1.get()
+        srv2_v2 = srv2_v1.get()
+        srv3_v2 = srv3_v1.get()
+
+        acct_dict = LoadDictFile()
+
+        root = tk.Toplevel() 
+        root.title(company_name)
+        root.geometry("900x500")
+        text = tk.Text(root, height = 500, width = 700, bg=bgcol)
+        label = Label(root, text = "Accounts Table")
+        label.config(font =("centaur", 22))
+        label.pack()
+        text.pack()
+
+        for edept in range(3):
+           
+            if (edept == 0 and srv1_v2 == 1) or (edept == 1 and srv2_v2 == 1) or (edept == 2 and srv3_v2 == 1):
+
+                df = pd.DataFrame({key: pd.Series(val[edept+2], 
+                                                index=['Dept','Balance','Discount','Created','Last Updated'])
+                                                    for key, val in acct_dict.items()})
+                dft = df.transpose()
+                dft['Dept'] = dft['Dept'].map('{:.0f}'.format)
+                dft['Balance'] = dft['Balance'].map('£{:,.2f}'.format)
+                text.insert(tk.END, "\n")
+                text.insert(tk.END, dft)
 
 
 def GraphDictFile():

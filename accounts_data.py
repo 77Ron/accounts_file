@@ -1,8 +1,8 @@
 # Account maintenance, transactions, billing, and scheduling for
 # individual services providers.
 
-# Currently a work in progress that stores dict files,
-# that will be relocated on a MySQL database.
+# Currently a work in progress that stores dict files.
+# Will be relocated on a MySQL database.
 
 
 import tkinter as tk
