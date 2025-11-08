@@ -6,5 +6,5 @@ class Transaction:
 
     company = company_name
     
-    def __init__(self, id = 0, trcode="---", srvcdesc=" ", amount = [0.00, 0.00, 0.00, 0.00], trdate=0):
+    def __init__(self, id = 0, trcode="---", trdate_t=0, srvcdesc=" ", amount = [0.00, 0.00, 0.00, 0.00], ):
         pass

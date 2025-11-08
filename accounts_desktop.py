@@ -7,14 +7,30 @@ from tkinter import ttk
 from tkinter.ttk import *
 from company_info import *
 
-def save(name_v):
-    name=name_v.get()  
-    print("Username is: " + name)
-    name_v.set("")
+
+#---------Put validations here in two functions. 
+    # One for account info and one for transactions.---
+"""
+    def service_ic(entry):
+          if entry.isdigit() == False:
+            return False
+          if int(entry) < 1 or int(entry) > 3:
+            return False
+          else:
+            return True
+    
+    service = root.register(service_ic)
+    usrv_label = tk.Label(root, text = 'Service Number:', font=('calibre',11, 'bold'), bg=bgcol)
+    usrv_entry = tk.Entry(root, textvariable = esrv_v, font=('calibre',11,'normal'), width=1,
+                          validate='key', validatecommand=(service, '%P'))
+    usrv_label.place(x=10, y=60)
+    usrv_entry.place(x=140, y=60)
+"""
+
 
 def dept(dp1, button1, button2, button3, estndchrg_v, esdiscnt_v, estot_v):
     dept=dp1
-    button1.configure(bg='SteelBlue3')
+    button1.configure(bg=btcol1)
     button2.configure(bg=btcol)
     button3.configure(bg=btcol)
 
@@ -49,6 +65,12 @@ def dept(dp1, button1, button2, button3, estndchrg_v, esdiscnt_v, estot_v):
     estot_v.set(stnd-disc_amount)
    
 
+def save(name_v):
+    name=name_v.get()  
+    print("Saved")
+    name_v.set("")
+
+
 def UpdateAccounts():
     root = tk.Toplevel()
     root.title("Account Balance File")
@@ -75,6 +97,7 @@ def UpdateAccounts():
     balance_total = 0.00
 
     name_v = tk.StringVar()
+    
     ename_v = tk.StringVar()
     esname_v = tk.StringVar()
     eid_v = tk.IntVar()
@@ -84,8 +107,7 @@ def UpdateAccounts():
     ecode_v = tk.StringVar()
     emobile_v = tk.StringVar()
     eemail_v = tk.StringVar()
-    etrc_v = tk.StringVar()
-
+    
     estndchrg_v = tk.DoubleVar()
     eothrchrg_v = tk.DoubleVar()
     epayment_v = tk.DoubleVar()
@@ -97,7 +119,9 @@ def UpdateAccounts():
     eotax_v = tk.DoubleVar()
     estot_v = tk.DoubleVar()
     eotot_v = tk.DoubleVar()
-    
+    etrc_v = tk.StringVar()
+
+    #------Username--------
 
     uname_label = tk.Label(root, text = 'Username:', font=('calibre',10, 'bold'), bg=bgcol)
     uname_entry = tk.Entry(root,textvariable = name_v, font=('calibre',10,'normal'))
@@ -120,7 +144,6 @@ def UpdateAccounts():
     esname_entry = tk.Entry(root,textvariable = esname_v, font=('calibre',10,'normal'))
     esname_label.place(x=52, y=180)
     esname_entry.place(x=126, y=180)
-
 
 
     #-------Address-------
@@ -177,8 +200,6 @@ def UpdateAccounts():
     etr_label = tk.Label(root, text = 'Standard Charge'+' '*10+'Other Charges'+' '*12+'Payment'+' '*15+'Refund', font=('garamond', 13, 'bold'), bg=bgcol)
     etr_label.place(x=18, y=410)
 
-
- 
     estndchrg_entry = tk.Entry(root, textvariable = estndchrg_v, font=('calibre',10,'normal'), width=10)
     estndchrg_entry.place(x=21, y=440)
 
@@ -190,7 +211,6 @@ def UpdateAccounts():
 
     erefund_entry = tk.Entry(root, textvariable = erefund_v, font=('calibre',10,'normal'), width=10)
     erefund_entry.place(x=453, y=440)
-
 
     esdiscnt_label = tk.Label(root, text = 'Discount', font=('garamond', 11, 'bold'), bg=bgcol)
     esdiscnt_label.place(x=18, y=468)
@@ -229,7 +249,7 @@ def UpdateAccounts():
     etrc_label.place(x=10, y=605)
     etrc_entry.place(x=10, y=630)
 
-    #---Save----
+    #----Save----
     save_btn = tk.Button(root,text = 'Save Updates', command = lambda: save(name_v), font=('garamond', 12, 'bold'), bg=btcol, fg='black')
     save_btn.place(x=330, y=680)
 
