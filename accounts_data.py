@@ -2,7 +2,7 @@
 # individual services providers.
 
 # Currently a work in progress that stores dict files.
-# Will be relocated on a MySQL database.
+# Will be relocated on an SQLite database.
 
 
 import tkinter as tk
@@ -46,6 +46,7 @@ def main():
     Menu(root, 'Settings', Settings, 340)
     Menu(root, 'Exit', lambda: exit(), 370)
     Menu(root, 'Update Accounts (temp)', UpdateDictFile, 430)
+    Menu(root, 'Reformat File (temp)', ReformatDictFile, 460)
 
     #---Set main menu window screen position
     fw = 226
@@ -58,11 +59,6 @@ def main():
 
 
     root.mainloop()
-
-    """
-        if fl1 == 'Reformat':
-            ReformatDictFile()
-    """
     
     exit()
 

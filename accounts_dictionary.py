@@ -435,9 +435,9 @@ def ReformatDictFile():
         account_temp = {(name, id):[info[0], " ", " ", info[1], " ", " ", "0.00", info[2], info[3], info[4]]}
         #Put info[2-4] into transactions with only one acct rec., but leave service number and date.
         #Transactions: id, trcode(str3), srvcdesc, amount[4 floats], date.
-        transaction_temp = {}
+        #transaction_temp = {}
 
-        print(name, id, info[0], info[1])
+        #print(name, id, info[0], info[1])
         acct_dict_temp.update(account_temp)
 
         """
@@ -448,5 +448,28 @@ def ReformatDictFile():
         newinfo[info[2]-1][4] = d2
         """
     f2 = open("accts_temp2", "wb")
+    f2.truncate()
     pickle.dump(acct_dict_temp, f2)
     f2.close()
+
+    print("===========\n")
+    f2 = open("accts_temp2", "rb")
+    acct_dict_temp = pickle.load(f2)
+    for (name,id), info in acct_dict_temp.items():
+        print(name,id,info,"\n")
+    f2.close()
+
+    #SQLite---------------
+    """
+    import sqlite3
+
+    conn = sqlite3.connect('------.db')
+    cursor = conn.cursor()
+    conn.execute("BEGIN")
+
+    conn.commit() 
+
+    with sqlite3.connect('--------.db') as conn:    
+      cursor = conn.cursor()    
+      cursor.execute("SELECT * FROM users")
+    """
