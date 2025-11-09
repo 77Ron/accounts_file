@@ -34,10 +34,18 @@ d3rng = 50.00
 
 
 #Display Preferences---------
+
+#---tkinter colours------
 bgcol = 'PaleTurquoise3'
 btcol = 'light blue3'
 btcol1 = 'SteelBlue3'
 
-#----------------------------------
+#---matplotlib colours-----
+gbcol = 'paleturquoise'
+
+
+
+
+#-------algorithms---------
 
 dept_name = [dept1,dept2,dept3]

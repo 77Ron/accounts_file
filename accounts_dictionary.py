@@ -374,7 +374,7 @@ def GraphDictFile():
                 df = pd.DataFrame({key: pd.Series(val[edept+2], index=['Dept','Balance','Discount','Created','Last Updated']) for key, val in acct_dict.items()})
                 dft = df.transpose()
                 #df = pd.DataFrame.from_dict(acct_dict, orient='index', columns = ['-Address-','-Post Code-', '-Dept.-', '-Balance-', '-Discount-'])
-                plt.figure(figsize=(8,5), facecolor = 'paleturquoise')
+                plt.figure(figsize=(8,5), facecolor = gbcol)
                 #ax = plt.gca()
                 #ax.set_facecolor("white")
                 plt.grid(True)
@@ -469,7 +469,23 @@ def ReformatDictFile():
 
     conn.commit() 
 
-    with sqlite3.connect('--------.db') as conn:    
-      cursor = conn.cursor()    
-      cursor.execute("SELECT * FROM users")
+    with sqlite3.connect('acounts_main.db') as conn:    
+        cursor = conn.cursor()    
+        cursor.execute("SELECT * FROM users")
+
+        CREATE TABLE account_info(
+
+            id INTEGER PRIMARY KEY,
+            name TEXT,
+            address1 TEXT,
+            address2 TEXT,
+            address3 TEXT,
+            pcode TEXT,
+            mobile INTEGER,
+            email TEXT,
+            balance REAL,
+            service1 INTEGER,
+            service2 INTEGER,
+            service3 INTEGER
+        );
     """
