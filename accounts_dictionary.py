@@ -2,6 +2,7 @@
 
 from datetime import datetime
 import pickle
+import sqlite3
 import pandas as pd
 import matplotlib.pyplot as plt
 from matplotlib.ticker import StrMethodFormatter
@@ -465,10 +466,6 @@ def ReformatDictFile():
 
     #SQLite---------------
     
-    import sqlite3
-
-    
-
     with sqlite3.connect('accounts_main.db') as conn:
 
         cursor = conn.cursor()    
@@ -476,11 +473,10 @@ def ReformatDictFile():
         sql='''
             DROP TABLE IF EXISTS account_info;
             DROP TABLE IF EXISTS transactions;
-            PRAGMA foreign_keys = 1;
+            PRAGMA foreign_keys = ON;
 
             CREATE TABLE account_info(
-
-                id INTEGER PRIMARY KEY NOT NULL,
+                id INTEGER,
                 name TEXT,
                 address1 TEXT,
                 address2 TEXT,
@@ -495,6 +491,7 @@ def ReformatDictFile():
                 service2_dtcr NUMERIC,
                 service3_taps INTEGER,
                 service3_dtcr NUMERIC,
+                PRIMARY KEY (id),
                 CONSTRAINT fk_transactions
                     FOREIGN KEY (id)
                     REFERENCES transactions(id)
@@ -502,8 +499,7 @@ def ReformatDictFile():
             );
         
             CREATE TABLE transactions(
-
-                id INTEGER NOT NULL,
+                id INTEGER REFERENCES account_info(id),
                 tr_code TEXT,
                 trdate_t NUMERIC NOT NULL,
                 service TEXT,
@@ -512,13 +508,35 @@ def ReformatDictFile():
                 amount3 REAL,
                 amount4 REAL,
                 PRIMARY KEY (id, tr_code, trdate_t)
-                FOREIGN KEY (id) REFERENCES account_info(id)
             )'''
         
         cursor.executescript(sql)
     
-    #conn = sqlite3.connect('------.db')
+    #conn = sqlite3.connect('accounts_main.db')
     #conn.execute("BEGIN")
-    #conn.commit() 
-    #cursor.execute("SELECT * FROM users")
-    #FOREIGN KEY (id) REFERENCES account_info(id), (is this required?)
+    #FOREIGN KEY (id) REFERENCES account_info(id)
+    with sqlite3.connect('accounts_main.db') as conn:
+
+        cursor = conn.cursor()    
+   
+        for (name1,id1), info in acct_dict.items():
+            
+            print(name1,id1,info,"\n")
+
+            d1 = datetime.now() #Consider using Julian date.
+            d2 = int(d1.strftime("%Y%m%d"))
+            d3 = float(d1.strftime("%Y%m%d.%H%M%S"))
+            sp = ' '
+            address=info[0]
+            pcode=info[1]
+            cursor.execute("INSERT INTO account_info VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, 0, 0, 0, 0, 0, 0, 0)", (name1, address, sp, sp, pcode, sp, sp))
+            
+            for i in range(3):
+                x1 = info[i+2][0]
+                if x1 > 0:
+                    trcode="C1"+str(x1)
+                    cursor.execute("INSERT INTO transactions VALUES (NULL, ?, ?,'SERVICE TEXT', ?, ?, ?, ?)", (trcode, d3, info[i+2][1], info[i+2][2], info[i+2][3], info[i+2][4]))
+            
+        #conn.commit() or END TRANSACTION
+        #cursor.execute("SELECT * FROM account_info")
+        #cursor.execute("SELECT * FROM transactions")
