@@ -464,44 +464,47 @@ def ReformatDictFile():
     f2.close()
 
     #SQLite---------------
-    """
+    
     import sqlite3
 
-    conn = sqlite3.connect('------.db')
-    cursor = conn.cursor()
-    conn.execute("BEGIN")
-
-    conn.commit() 
+    #conn = sqlite3.connect('------.db')
+    #conn.execute("BEGIN")
+    #conn.commit() 
 
     with sqlite3.connect('acounts_main.db') as conn:    
         cursor = conn.cursor()    
-        cursor.execute("SELECT * FROM users")
+        #cursor.execute("SELECT * FROM users")
+        sql='''CREATE TABLE account_info(
 
-        CREATE TABLE account_info(
+                id INTEGER NOT NULL PRIMARY KEY,
+                name TEXT,
+                address1 TEXT,
+                address2 TEXT,
+                address3 TEXT,
+                post_code TEXT,
+                mobile INTEGER,
+                email TEXT,
+                balance REAL,
+                service1 INTEGER,
+                service2 INTEGER,
+                service3 INTEGER,
+                FOREIGN KEY (id) REFERENCES transactions(id) 
+                    ON DELETE CASCADE 
+            )'''
+        
+        cursor.execute(sql)
 
-            id INTEGER PRIMARY KEY,
-            name TEXT,
-            address1 TEXT,
-            address2 TEXT,
-            address3 TEXT,
-            post_code TEXT,
-            mobile INTEGER,
-            email TEXT,
-            balance REAL,
-            service1 INTEGER,
-            service2 INTEGER,
-            service3 INTEGER
-        );
+        sql='''CREATE TABLE transactions(
 
-        CREATE TABLE transactions(
-
-            id INTEGER PRIMARY KEY, (same as account id)
-            tr_code TEXT,
-            trdate_t INTEGER,
-            service TEXT,
-            amount1 REAL,
-            amount2 REAL,
-            amount3 REAL,
-            amount4 REAL
-        );
-    """
+                FOREIGN KEY (id) REFERENCES account_info(id),
+                PRIMARY KEY (id INTEGER NOT NULL, tr_code TEXT, trdate_t INTEGER NOT NULL),
+                service TEXT,
+                amount1 REAL,
+                amount2 REAL,
+                amount3 REAL,
+                amount4 REAL
+            )'''
+        
+        cursor.execute(sql)
+       
+    
