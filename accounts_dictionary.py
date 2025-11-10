@@ -467,13 +467,12 @@ def ReformatDictFile():
     
     import sqlite3
 
-    #conn = sqlite3.connect('------.db')
-    #conn.execute("BEGIN")
-    #conn.commit() 
+    
 
-    with sqlite3.connect('acounts_main.db') as conn:    
+    with sqlite3.connect('acounts_main.db') as conn:
+
         cursor = conn.cursor()    
-        #cursor.execute("SELECT * FROM users")
+   
         sql='''CREATE TABLE account_info(
 
                 id INTEGER NOT NULL PRIMARY KEY,
@@ -497,7 +496,7 @@ def ReformatDictFile():
         sql='''CREATE TABLE transactions(
 
                 FOREIGN KEY (id) REFERENCES account_info(id),
-                PRIMARY KEY (id INTEGER NOT NULL, tr_code TEXT, trdate_t INTEGER NOT NULL),
+                PRIMARY KEY (id INTEGER NOT NULL, tr_code TEXT, trdate_t NUMERIC NOT NULL),
                 service TEXT,
                 amount1 REAL,
                 amount2 REAL,
@@ -506,5 +505,8 @@ def ReformatDictFile():
             )'''
         
         cursor.execute(sql)
-       
     
+    #conn = sqlite3.connect('------.db')
+    #conn.execute("BEGIN")
+    #conn.commit() 
+    #cursor.execute("SELECT * FROM users")
