@@ -469,13 +469,18 @@ def ReformatDictFile():
 
     
 
-    with sqlite3.connect('acounts_main.db') as conn:
+    with sqlite3.connect('accounts_main.db') as conn:
 
         cursor = conn.cursor()    
    
-        sql='''CREATE TABLE account_info(
+        sql='''
+            DROP TABLE IF EXISTS account_info;
+            DROP TABLE IF EXISTS transactions;
+            PRAGMA foreign_keys = 1;
 
-                id INTEGER NOT NULL PRIMARY KEY,
+            CREATE TABLE account_info(
+
+                id INTEGER PRIMARY KEY NOT NULL,
                 name TEXT,
                 address1 TEXT,
                 address2 TEXT,
@@ -487,26 +492,29 @@ def ReformatDictFile():
                 service1 INTEGER,
                 service2 INTEGER,
                 service3 INTEGER,
-                FOREIGN KEY (id) REFERENCES transactions(id) 
-                    ON DELETE CASCADE 
-            )'''
+                CONSTRAINT fk_transactions
+                    FOREIGN KEY (id)
+                    REFERENCES transactions(id)
+                    ON DELETE CASCADE  
+            );
         
-        cursor.execute(sql)
+            CREATE TABLE transactions(
 
-        sql='''CREATE TABLE transactions(
-
-                FOREIGN KEY (id) REFERENCES account_info(id),
-                PRIMARY KEY (id INTEGER NOT NULL, tr_code TEXT, trdate_t NUMERIC NOT NULL),
+                id INTEGER NOT NULL,
+                tr_code TEXT,
+                trdate_t NUMERIC NOT NULL,
                 service TEXT,
                 amount1 REAL,
                 amount2 REAL,
                 amount3 REAL,
-                amount4 REAL
+                amount4 REAL,
+                PRIMARY KEY (id, tr_code, trdate_t)
             )'''
         
-        cursor.execute(sql)
+        cursor.executescript(sql)
     
     #conn = sqlite3.connect('------.db')
     #conn.execute("BEGIN")
     #conn.commit() 
     #cursor.execute("SELECT * FROM users")
+    #FOREIGN KEY (id) REFERENCES account_info(id), (is this required?)

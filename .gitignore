@@ -3,6 +3,8 @@ accts2
 accts_temp2
 accts2save
 
+accounts_main.db
+
 __pycache__/
 *.py[cod]
 *$py.class
