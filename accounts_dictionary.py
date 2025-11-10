@@ -509,6 +509,7 @@ def ReformatDictFile():
                 amount3 REAL,
                 amount4 REAL,
                 PRIMARY KEY (id, tr_code, trdate_t)
+                FOREIGN KEY (id) REFERENCES account_info(id)
             )'''
         
         cursor.executescript(sql)
