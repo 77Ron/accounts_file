@@ -295,6 +295,10 @@ def TableDictFile():
                 dft = df.transpose()
                 dft['Dept'] = dft['Dept'].map('{:.0f}'.format)
                 dft['Balance'] = dft['Balance'].map('£{:,.2f}'.format)
+                dft['Created'] = dft['Created'].map(lambda x: "{1}-{2}-{0}".format(int(x/10000),int((x%10000)/100),int(x%100)))
+                dft['Last Updated'] = dft['Last Updated'].map(lambda x: "{1}-{2}-{0}".format(int(x/10000),int((x%10000)/100),int(x%100)))
+
+                #dft['Created'] = pd.to_datetime(dft['Created']).dt.date
                 text.insert(tk.END, "\n")
                 text.insert(tk.END, dft)
 
@@ -480,12 +484,24 @@ def ReformatDictFile():
             address1 TEXT,
             address2 TEXT,
             address3 TEXT,
-            pcode TEXT,
+            post_code TEXT,
             mobile INTEGER,
             email TEXT,
             balance REAL,
             service1 INTEGER,
             service2 INTEGER,
             service3 INTEGER
+        );
+
+        CREATE TABLE transactions(
+
+            id INTEGER PRIMARY KEY, (same as account id)
+            tr_code TEXT,
+            trdate_t INTEGER,
+            service TEXT,
+            amount1 REAL,
+            amount2 REAL,
+            amount3 REAL,
+            amount4 REAL
         );
     """

@@ -35,17 +35,28 @@ d3rng = 50.00
 
 #Display Preferences---------
 
-#---tkinter colours------
-bgcol = 'PaleTurquoise3'
-btcol = 'light blue3'
-btcol1 = 'SteelBlue3'
-
-#---matplotlib colours-----
-gbcol = 'paleturquoise'
-
-
+col_style = "G"
 
 
 #-------algorithms---------
 
 dept_name = [dept1,dept2,dept3]
+
+
+if col_style == "T":
+    #---tkinter------
+    bgcol = 'PaleTurquoise3'
+    btcol = 'light blue3'
+    btcol1 = 'SteelBlue3'
+
+    #---matplotlib-----
+    gbcol = 'paleturquoise'
+
+elif col_style == "G":
+    #---tkinter------
+    bgcol = 'gainsboro'
+    btcol = 'light grey'
+    btcol1 = 'light slate grey'
+
+    #---matplotlib-----
+    gbcol = 'gainsboro'
