@@ -486,12 +486,15 @@ def ReformatDictFile():
                 address2 TEXT,
                 address3 TEXT,
                 post_code TEXT,
-                mobile INTEGER,
+                mobile TEXT,
                 email TEXT,
                 balance REAL,
-                service1 INTEGER,
-                service2 INTEGER,
-                service3 INTEGER,
+                service1_taps INTEGER,
+                service1_dtcr NUMERIC,
+                service2_taps INTEGER,
+                service2_dtcr NUMERIC,
+                service3_taps INTEGER,
+                service3_dtcr NUMERIC,
                 CONSTRAINT fk_transactions
                     FOREIGN KEY (id)
                     REFERENCES transactions(id)
