@@ -204,17 +204,17 @@ def PrintDictFile():
     for (name,id), info in acct_dict.items():
         if name[0] in let1:
             if (deptin == 0 or deptin == 1) and info[2][3] > 0:
-                A0 = Dept1Account(1, name, id, info[0], info[1], info[2][1])
+                A0 = Dept1Account(srvc_code[0], name, id, info[0], info[1], info[2][1])
                 T.insert(tk.END, A0)
                 T.insert(tk.END,'\n')
                 balance_total += info[2][1]
             if (deptin == 0 or deptin == 2) and info[3][3] > 0:
-                A0 = Dept2Account(2, name, id, info[0], info[1], info[3][1])
+                A0 = Dept2Account(srvc_code[1], name, id, info[0], info[1], info[3][1])
                 T.insert(tk.END, A0)
                 T.insert(tk.END,'\n')
                 balance_total += info[3][1]
             if (deptin == 0 or deptin == 3) and info[4][3] > 0:
-                A0 = Dept3Account(3, name, id, info[0], info[1], info[4][1])         
+                A0 = Dept3Account(srvc_code[2], name, id, info[0], info[1], info[4][1])         
                 T.insert(tk.END, A0)
                 T.insert(tk.END,'\n')
                 balance_total += info[4][1]         
@@ -485,10 +485,13 @@ def ReformatDictFile():
                 mobile TEXT,
                 email TEXT,
                 balance REAL,
+                service1_code TEXT,
                 service1_taps INTEGER,
                 service1_dtcr NUMERIC,
+                service2_code TEXT,
                 service2_taps INTEGER,
                 service2_dtcr NUMERIC,
+                service3_code TEXT,
                 service3_taps INTEGER,
                 service3_dtcr NUMERIC,
                 PRIMARY KEY (id),
@@ -502,7 +505,7 @@ def ReformatDictFile():
                 id INTEGER REFERENCES account_info(id),
                 tr_code TEXT,
                 trdate_t NUMERIC NOT NULL,
-                service TEXT,
+                service_code TEXT,
                 amount1 REAL,
                 amount2 REAL,
                 amount3 REAL,
@@ -529,13 +532,18 @@ def ReformatDictFile():
             sp = ' '
             address=info[0]
             pcode=info[1]
-            cursor.execute("INSERT INTO account_info VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, 0, 0, 0, 0, 0, 0, 0)", (name1, address, sp, sp, pcode, sp, sp))
+            cursor.execute("INSERT INTO account_info VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, 0, ?, 0, 0, ?, 0, 0, ?, 0, 0)", (name1, address, sp, sp, pcode, sp, sp, sp, sp, sp))
             
             for i in range(3):
-                x1 = info[i+2][0]
+                x1 = info[i+2][3]
                 if x1 > 0:
-                    trcode="C1"+str(x1)
-                    cursor.execute("INSERT INTO transactions VALUES (NULL, ?, ?,'SERVICE TEXT', ?, ?, ?, ?)", (trcode, d3, info[i+2][1], info[i+2][2], info[i+2][3], info[i+2][4]))
+                    trcode="C1"
+                    scode=srvc_code[i]
+                    for t in range(1000):
+                        print('.')
+                    d1 = datetime.now()
+                    d3 = float(d1.strftime("%Y%m%d.%H%M%S")) #seconds not zeros
+                    cursor.execute("INSERT INTO transactions VALUES ((SELECT id FROM account_info WHERE name = ?), ?, ?, ?, ?, ?, ?, ?)", (name1, trcode, d3, scode, info[i+2][1], info[i+2][2], info[i+2][3], info[i+2][4]))
             
         #conn.commit() or END TRANSACTION
         #cursor.execute("SELECT * FROM account_info")

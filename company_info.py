@@ -14,6 +14,8 @@ d1dc1 = 10
 d1dc2 = 20
 d1rng = 100.00
 
+srvc1_code = "RE1"
+
 #-----------Dept 2-------------
 dept2 = "Groceries"
 stnrd_fee2 = 25.00
@@ -22,6 +24,8 @@ hrly_rate2 = 'N'
 d2dc1 = 0
 d2dc2 = 25
 d2rng = 10.00
+
+srvc2_code = "GR1"
 
 #-----------Dept 3-------------
 dept3 = "Piano Lessons"
@@ -32,6 +36,8 @@ d3dc1 = 5
 d3dc2 = 20
 d3rng = 50.00
 
+srvc3_code = "PI1"
+
 
 #Display Preferences---------
 
@@ -40,7 +46,8 @@ col_style = "G"
 
 #-------algorithms---------
 
-dept_name = [dept1,dept2,dept3]
+dept_name = [dept1, dept2, dept3]
+srvc_code = [srvc1_code, srvc2_code, srvc3_code]
 
 
 if col_style == "T":

@@ -184,15 +184,15 @@ def UpdateAccounts():
 
     #----Transactions--------
 
-    dept1_btn = tk.Button(root, text = '1 '+dept1, 
+    dept1_btn = tk.Button(root, text = dept1, 
                           command = lambda: dept(1, dept1_btn, dept2_btn, dept3_btn, estndchrg_v, esdiscnt_v, estot_v), 
                           font=('garamond', 12, 'bold'), bg=btcol, fg='black')
     dept1_btn.place(x=25, y=370)
-    dept2_btn = tk.Button(root, text = '2 '+dept2,
+    dept2_btn = tk.Button(root, text = dept2,
                           command = lambda: dept(2, dept2_btn, dept1_btn, dept3_btn, estndchrg_v, esdiscnt_v, estot_v), 
                           font=('garamond', 12, 'bold'), bg=btcol, fg='black')
     dept2_btn.place(x=40+len(dept1)*10, y=370)
-    dept3_btn = tk.Button(root, text = '3 '+dept3, 
+    dept3_btn = tk.Button(root, text = dept3, 
                           command = lambda: dept(3, dept3_btn, dept1_btn, dept2_btn, estndchrg_v, esdiscnt_v, estot_v), 
                           font=('garamond', 12, 'bold'), bg=btcol, fg='black')
     dept3_btn.place(x=50+len(dept1)*10+len(dept2)*10, y=370)

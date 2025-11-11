@@ -6,9 +6,8 @@ class Account:
 
     company = company_name
     
-    def __init__(self, dept = 0, name= "-None-", id = 0, address = "-Blank-", p_code = "--- ---", balance = 0.00):
+    def __init__(self, dept = "AA0", name= "-None-", id = 0, address = "-Blank-", p_code = "--- ---", balance = 0.00):
         self.dept = dept
-        self.deptname = dept_name[dept-1]
         self.name = name
         self.id = id
         self.address = address
@@ -16,14 +15,15 @@ class Account:
         self.balance = balance
    
     def __str__(self):
-        return "%s  %-20s   %i  %-25s %s    %i %-15s %8.2f %8.2f"\
+        return "%s  %-20s   %i  %-25s %s    %s %-15s %8.2f %8.2f"\
               % (self.company, self.name, self.id, self.address, self.p_code, self.dept, self.deptname, self.balance, self.discnt)
     
 class Dept1Account(Account):
 
-    def __init__(self, dept = 1, name= "-None-", id = 0, address = "-Blank-", p_code = "--- ---", balance = 0.00):
+    def __init__(self, dept = srvc_code[0], name= "-None-", id = 0, address = "-Blank-", p_code = "--- ---", balance = 0.00):
         Account.__init__(self, dept, name, id, address, p_code, balance)
-      
+        
+        self.deptname = dept_name[0]
         self.discnt = self.discount()
 
     def discount(self):
@@ -36,9 +36,10 @@ class Dept1Account(Account):
 
 class Dept2Account(Account):
 
-    def __init__(self, dept = 2, name= "-None-", id = 0, address = "-Blank-", p_code = "--- ---", balance = 0.00):
+    def __init__(self, dept = srvc_code[1], name= "-None-", id = 0, address = "-Blank-", p_code = "--- ---", balance = 0.00):
         Account.__init__(self, dept, name, id, address, p_code, balance)
-  
+        
+        self.deptname = dept_name[1]
         self.discnt = self.discount()
     
     def discount(self):
@@ -51,9 +52,10 @@ class Dept2Account(Account):
 
 class Dept3Account(Account):
 
-    def __init__(self, dept = 3, name= "-None-", id = 0, address = "-Blank-", p_code = "--- ---", balance = 0.00):
+    def __init__(self, dept = srvc_code[2], name= "-None-", id = 0, address = "-Blank-", p_code = "--- ---", balance = 0.00):
         Account.__init__(self, dept, name, id, address, p_code, balance)
- 
+        
+        self.deptname = dept_name[2]
         self.discnt = self.discount()
 
     def discount(self):
