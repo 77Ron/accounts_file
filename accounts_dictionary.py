@@ -438,11 +438,8 @@ def ReformatDictFile():
         d2 = int(d1.strftime("%Y%m%d"))
         
         account_temp = {(name, id):[info[0], " ", " ", info[1], " ", " ", "0.00", info[2], info[3], info[4]]}
-        #Put info[2-4] into transactions with only one acct rec., but leave service number and date.
-        #Transactions: id, trcode(str3), srvcdesc, amount[4 floats], date.
         #transaction_temp = {}
 
-        #print(name, id, info[0], info[1])
         acct_dict_temp.update(account_temp)
 
         """
@@ -530,10 +527,11 @@ def ReformatDictFile():
 
             d1 = datetime.now() #Consider using Julian date.
             d2 = int(d1.strftime("%Y%m%d"))
-            d3 = float(d1.strftime("%Y%m%d.%H%M%S"))
+            d3 = float(d1.strftime("%Y%m%d%H%M%S"))
             sp = ' '
             address=info[0]
             pcode=info[1]
+
             if sflag == 1:
                 cursor.execute("INSERT INTO account_info VALUES (?, ?, ?, ?, ?, ?, ?, ?, 0, ?, 0, 0, ?, 0, 0, ?, 0, 0)", (start_acct_no, name1, address, sp, sp, pcode, sp, sp, sp, sp, sp))
                 sflag=0
@@ -545,12 +543,14 @@ def ReformatDictFile():
                 if x1 > 0:
                     trcode="C1"
                     scode=srvc_code[i]
-                    for t in range(1000):
-                        print('.')
+                    for t in range(200000):
+                        print('.', end="")
                     d1 = datetime.now()
-                    d3 = float(d1.strftime("%Y%m%d.%H%M%S")) #seconds not zeros
+                    d3 = float(d1.strftime("%Y%m%d%H%M%S"))
+                    
                     cursor.execute("INSERT INTO transactions VALUES ((SELECT id FROM account_info WHERE name = ?), ?, ?, ?, ?, ?, ?, ?)", (name1, trcode, d3, scode, info[i+2][1], info[i+2][2], info[i+2][3], info[i+2][4]))
-            
+                    #Update accounts_info here, scode and date d2.
+
         #conn.commit() or END TRANSACTION
         #cursor.execute("SELECT * FROM account_info")
         #cursor.execute("SELECT * FROM transactions")
