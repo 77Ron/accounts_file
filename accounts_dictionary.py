@@ -550,6 +550,7 @@ def ReformatDictFile():
                     
                     cursor.execute("INSERT INTO transactions VALUES ((SELECT id FROM account_info WHERE name = ?), ?, ?, ?, ?, ?, ?, ?)", (name1, trcode, d3, scode, info[i+2][1], info[i+2][2], info[i+2][3], info[i+2][4]))
                     #Update accounts_info here, scode and date d2.
+                    #Change all dates to integer not NUMERIC, REAL, or float.
 
         #conn.commit() or END TRANSACTION
         #cursor.execute("SELECT * FROM account_info")
