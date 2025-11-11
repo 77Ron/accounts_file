@@ -520,8 +520,10 @@ def ReformatDictFile():
     #FOREIGN KEY (id) REFERENCES account_info(id)
     with sqlite3.connect('accounts_main.db') as conn:
 
-        cursor = conn.cursor()    
-   
+        cursor = conn.cursor()
+
+        #cursor.execute("UPDATE MAIN.SQLITE_SEQUENCE SET SEQ = 1000 WHERE NAME = 'account_info'")
+        sflag = 1
         for (name1,id1), info in acct_dict.items():
             
             print(name1,id1,info,"\n")
@@ -532,7 +534,11 @@ def ReformatDictFile():
             sp = ' '
             address=info[0]
             pcode=info[1]
-            cursor.execute("INSERT INTO account_info VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, 0, ?, 0, 0, ?, 0, 0, ?, 0, 0)", (name1, address, sp, sp, pcode, sp, sp, sp, sp, sp))
+            if sflag == 1:
+                cursor.execute("INSERT INTO account_info VALUES (?, ?, ?, ?, ?, ?, ?, ?, 0, ?, 0, 0, ?, 0, 0, ?, 0, 0)", (start_acct_no, name1, address, sp, sp, pcode, sp, sp, sp, sp, sp))
+                sflag=0
+            else:
+                cursor.execute("INSERT INTO account_info VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, 0, ?, 0, 0, ?, 0, 0, ?, 0, 0)", (name1, address, sp, sp, pcode, sp, sp, sp, sp, sp))
             
             for i in range(3):
                 x1 = info[i+2][3]

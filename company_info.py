@@ -2,6 +2,7 @@
 
 company_name = "RXX100"
 acct_number_prefix = "RXA"
+start_acct_no = 10001
 
 #Department settings
 
