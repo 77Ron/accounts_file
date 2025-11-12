@@ -551,9 +551,34 @@ def ReformatDictFile():
                     
                     cursor.execute("INSERT INTO transactions VALUES "
                     "((SELECT id FROM account_info WHERE name = ?), ?, ?, ?, ?, ?, ?, ?)",
-                      (name1, trcode, d3, scode, info[i+2][1], info[i+2][2], info[i+2][3], info[i+2][4]))
-                    #Update accounts_info here, scode and date d2.
-        
+                    (name1, trcode, d3, scode, info[i+2][1], info[i+2][2], info[i+2][3], info[i+2][4]))
+                    
+                    #Update accounts_info.
+
+                    s2flag = 1
+                    
+                    cursor.execute("SELECT * FROM account_info WHERE name = ?", (name1,))
+                    S1 = cursor.fetchone()[11]
+                    if S1 == 0:
+                        cursor.execute("UPDATE account_info SET service1_code = ?, service1_dtcr = ? WHERE name = ?",
+                                    (scode, d2, name1))
+                        s2flag = 0
+                    
+                    if s2flag == 1:
+                        cursor.execute("SELECT * FROM account_info WHERE name = ?", (name1,))
+                        S1 = cursor.fetchone()[14]
+                        if S1 == 0:
+                            cursor.execute("UPDATE account_info SET service2_code = ?, service2_dtcr = ? WHERE name = ?",
+                                        (scode, d2, name1))
+                            s2flag = 0
+                    
+                    if s2flag == 1:
+                        cursor.execute("SELECT * FROM account_info WHERE name = ?", (name1,))
+                        S1 = cursor.fetchone()[17]
+                        if S1 == 0:
+                            cursor.execute("UPDATE account_info SET service3_code = ?, service3_dtcr = ? WHERE name = ?",
+                                        (scode, d2, name1))
+                        
         
         #conn = sqlite3.connect('accounts_main.db')
         #conn.execute("BEGIN")

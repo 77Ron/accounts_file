@@ -4,6 +4,7 @@ accts_temp2
 accts2save
 
 accounts_main.db
+accounts_main.db-journal
 
 __pycache__/
 *.py[cod]

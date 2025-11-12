@@ -28,7 +28,7 @@ def Settings():
     tab2 = tk.Frame(tabControl, background=bgcol)
     tab3 = tk.Frame(tabControl, background=bgcol)
     tab4 = tk.Frame(tabControl, background=bgcol)
-    tabControl.add(tab1, text='Departments')
+    tabControl.add(tab1, text='Main')
     tabControl.add(tab2, text='Appearance')
     tabControl.add(tab3, text='Calendar')
     tabControl.add(tab4, text='Security')
