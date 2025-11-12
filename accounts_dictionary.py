@@ -533,22 +533,28 @@ def ReformatDictFile():
             pcode=info[1]
 
             if sflag == 1:
-                cursor.execute("INSERT INTO account_info VALUES (?, ?, ?, ?, ?, ?, ?, ?, 0, ?, 0, 0, ?, 0, 0, ?, 0, 0)", (start_acct_no, name1, address, sp, sp, pcode, sp, sp, sp, sp, sp))
-                sflag=0
+                cursor.execute("INSERT INTO account_info VALUES "
+                "(?, ?, ?, ?, ?, ?, ?, ?, 0, ?, 0, 0, ?, 0, 0, ?, 0, 0)", 
+                (start_acct_no, name1, address, sp, sp, pcode, sp, sp, sp, sp, sp))
+                sflag = 0
             else:
-                cursor.execute("INSERT INTO account_info VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, 0, ?, 0, 0, ?, 0, 0, ?, 0, 0)", (name1, address, sp, sp, pcode, sp, sp, sp, sp, sp))
+                cursor.execute("INSERT INTO account_info VALUES "
+                "(NULL, ?, ?, ?, ?, ?, ?, ?, 0, ?, 0, 0, ?, 0, 0, ?, 0, 0)", 
+                (name1, address, sp, sp, pcode, sp, sp, sp, sp, sp))
             
             for i in range(3):
                 x1 = info[i+2][3]
                 if x1 > 0:
-                    trcode="C1"
-                    scode=srvc_code[i]
+                    trcode = "C1"
+                    scode = srvc_code[i]
                     for t in range(200000):
                         print('.', end="")
                     d1 = datetime.now()
                     d3 = int(d1.strftime("%Y%m%d%H%M%S"))
                     
-                    cursor.execute("INSERT INTO transactions VALUES ((SELECT id FROM account_info WHERE name = ?), ?, ?, ?, ?, ?, ?, ?)", (name1, trcode, d3, scode, info[i+2][1], info[i+2][2], info[i+2][3], info[i+2][4]))
+                    cursor.execute("INSERT INTO transactions VALUES "
+                    "((SELECT id FROM account_info WHERE name = ?), ?, ?, ?, ?, ?, ?, ?)",
+                      (name1, trcode, d3, scode, info[i+2][1], info[i+2][2], info[i+2][3], info[i+2][4]))
                     #Update accounts_info here, scode and date d2.
 
         #conn.commit() or END TRANSACTION
