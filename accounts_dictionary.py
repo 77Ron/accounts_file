@@ -554,32 +554,25 @@ def ReformatDictFile():
                     (name1, trcode, d3, scode, info[i+2][1], info[i+2][2], info[i+2][3], info[i+2][4]))
                     
                     #Update accounts_info.
-
-                    s2flag = 1
-                    
-                    cursor.execute("SELECT * FROM account_info WHERE name = ?", (name1,))
-                    S1 = cursor.fetchone()[11]
-                    if S1 == 0:
-                        cursor.execute("UPDATE account_info SET service1_code = ?, service1_dtcr = ? WHERE name = ?",
-                                    (scode, d2, name1))
-                        s2flag = 0
-                    
-                    if s2flag == 1:
-                        cursor.execute("SELECT * FROM account_info WHERE name = ?", (name1,))
-                        S1 = cursor.fetchone()[14]
-                        if S1 == 0:
-                            cursor.execute("UPDATE account_info SET service2_code = ?, service2_dtcr = ? WHERE name = ?",
-                                        (scode, d2, name1))
-                            s2flag = 0
-                    
-                    if s2flag == 1:
-                        cursor.execute("SELECT * FROM account_info WHERE name = ?", (name1,))
-                        S1 = cursor.fetchone()[17]
-                        if S1 == 0:
-                            cursor.execute("UPDATE account_info SET service3_code = ?, service3_dtcr = ? WHERE name = ?",
-                                        (scode, d2, name1))
                         
-        
+                    for S2 in range(11, 18, 3):
+                        cursor.execute("SELECT * FROM account_info WHERE name = ?", (name1,))
+                        S1 = cursor.fetchone()[S2]
+                        if S1 == 0:
+                            if S2 == 11:
+                                cursor.execute("UPDATE account_info SET service1_code = ?, service1_dtcr = ? WHERE name = ?",
+                                                (scode, d2, name1))
+                                break
+                            if S2 == 14:
+                                cursor.execute("UPDATE account_info SET service2_code = ?, service2_dtcr = ? WHERE name = ?",
+                                                (scode, d2, name1))
+                                break
+                            if S2 == 17:
+                                cursor.execute("UPDATE account_info SET service3_code = ?, service3_dtcr = ? WHERE name = ?",
+                                                (scode, d2, name1))
+                                break
+                            
+                    
         #conn = sqlite3.connect('accounts_main.db')
         #conn.execute("BEGIN")
         #conn.commit() or END TRANSACTION
