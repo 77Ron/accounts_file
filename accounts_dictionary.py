@@ -474,23 +474,23 @@ def ReformatDictFile():
 
             CREATE TABLE account_info(
                 id INTEGER,
-                name TEXT,
+                name TEXT NOT NULL,
                 address1 TEXT,
                 address2 TEXT,
                 address3 TEXT,
                 post_code TEXT,
                 mobile TEXT,
                 email TEXT,
-                balance REAL,
+                balance REAL NOT NULL,
                 service1_code TEXT,
-                service1_taps INTEGER,
-                service1_dtcr NUMERIC,
+                service1_taps INTEGER NOT NULL,
+                service1_dtcr INTEGER NOT NULL,
                 service2_code TEXT,
-                service2_taps INTEGER,
-                service2_dtcr NUMERIC,
+                service2_taps INTEGER NOT NULL,
+                service2_dtcr INTEGER NOT NULL,
                 service3_code TEXT,
-                service3_taps INTEGER,
-                service3_dtcr NUMERIC,
+                service3_taps INTEGER NOT NULL,
+                service3_dtcr INTEGER NOT NULL,
                 PRIMARY KEY (id),
                 CONSTRAINT fk_transactions
                     FOREIGN KEY (id)
@@ -500,8 +500,8 @@ def ReformatDictFile():
         
             CREATE TABLE transactions(
                 id INTEGER REFERENCES account_info(id),
-                tr_code TEXT,
-                trdate_t NUMERIC NOT NULL,
+                tr_code TEXT NOT NULL,
+                trdate_t INTEGER NOT NULL,
                 service_code TEXT,
                 amount1 REAL,
                 amount2 REAL,
@@ -527,7 +527,7 @@ def ReformatDictFile():
 
             d1 = datetime.now() #Consider using Julian date.
             d2 = int(d1.strftime("%Y%m%d"))
-            d3 = float(d1.strftime("%Y%m%d%H%M%S"))
+            d3 = int(d1.strftime("%Y%m%d%H%M%S"))
             sp = ' '
             address=info[0]
             pcode=info[1]
@@ -546,11 +546,10 @@ def ReformatDictFile():
                     for t in range(200000):
                         print('.', end="")
                     d1 = datetime.now()
-                    d3 = float(d1.strftime("%Y%m%d%H%M%S"))
+                    d3 = int(d1.strftime("%Y%m%d%H%M%S"))
                     
                     cursor.execute("INSERT INTO transactions VALUES ((SELECT id FROM account_info WHERE name = ?), ?, ?, ?, ?, ?, ?, ?)", (name1, trcode, d3, scode, info[i+2][1], info[i+2][2], info[i+2][3], info[i+2][4]))
                     #Update accounts_info here, scode and date d2.
-                    #Change all dates to integer not NUMERIC, REAL, or float.
 
         #conn.commit() or END TRANSACTION
         #cursor.execute("SELECT * FROM account_info")
