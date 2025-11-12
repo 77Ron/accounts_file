@@ -540,41 +540,42 @@ def ReformatDictFile():
                 (name1, address, sp, sp, pcode, sp, sp, sp, sp, sp))
             
             for i in range(3):
+
                 x1 = info[i+2][3]
+
                 if x1 > 0:
+
                     trcode = "C1"
                     scode = srvc_code[i]
                     for t in range(200000):
                         print('.', end="") #Delay for time stamp
                     d1 = datetime.now()
                     d3 = int(d1.strftime("%Y%m%d%H%M%S"))
-
+                    tot1 = info[i+2][1] - info[i+2][2]
                     cursor.execute("SELECT * FROM account_info WHERE name = ?", (name1,))
-                    ID1 = cursor.fetchone()[0]
-
+                    tup1 = cursor.fetchone()
+                    ID1 = tup1[0]
+                    b1 = tup1[8] + tot1 #Balance update.
+                    s1 = tup1[11]
+                    s2 = tup1[14]
+                    s3 = tup1[17]
+                   
                     cursor.execute("INSERT INTO transactions VALUES "
                     "(?, ?, ?, ?, ?, ?, ?, ?)",
-                    (ID1, trcode, d3, scode, info[i+2][1], info[i+2][2], info[i+2][3], info[i+2][4]))
+                    (ID1, trcode, d3, scode, info[i+2][1], info[i+2][2], 0, tot1))
                     
-                    #Update accounts_info. (Add balance update.)
+                    #Update accounts_info.
                     
-                    for S2 in range(11, 18, 3):
-                        cursor.execute("SELECT * FROM account_info WHERE id = ?", (ID1,))
-                        S1 = cursor.fetchone()[S2]
-                        if S1 == 0:
-                            if S2 == 11:
-                                cursor.execute("UPDATE account_info SET service1_code = ?, service1_dtcr = ? WHERE id = ?",
-                                                (scode, d2, ID1))
-                                break
-                            if S2 == 14:
-                                cursor.execute("UPDATE account_info SET service2_code = ?, service2_dtcr = ? WHERE id = ?",
-                                                (scode, d2, ID1))
-                                break
-                            if S2 == 17:
-                                cursor.execute("UPDATE account_info SET service3_code = ?, service3_dtcr = ? WHERE id = ?",
-                                                (scode, d2, ID1))
-                                break
-                            
+                    if s1 == 0:
+                        cursor.execute("UPDATE account_info SET balance = ?, service1_code = ?, service1_dtcr = ? WHERE id = ?",
+                                        (b1, scode, d2, ID1))
+                    elif s2 == 0:
+                        cursor.execute("UPDATE account_info SET balance = ?, service2_code = ?, service2_dtcr = ? WHERE id = ?",
+                                        (b1, scode, d2, ID1))
+                    elif s3 == 0:
+                        cursor.execute("UPDATE account_info SET balance = ?, service3_code = ?, service3_dtcr = ? WHERE id = ?",
+                                        (b1, scode, d2, ID1))
+                    
                     
         #conn = sqlite3.connect('accounts_main.db')
         #conn.execute("BEGIN")
