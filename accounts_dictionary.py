@@ -512,9 +512,6 @@ def ReformatDictFile():
         
         cursor.executescript(sql)
     
-    #conn = sqlite3.connect('accounts_main.db')
-    #conn.execute("BEGIN")
-    #FOREIGN KEY (id) REFERENCES account_info(id)
     with sqlite3.connect('accounts_main.db') as conn:
 
         cursor = conn.cursor()
@@ -548,7 +545,7 @@ def ReformatDictFile():
                     trcode = "C1"
                     scode = srvc_code[i]
                     for t in range(200000):
-                        print('.', end="")
+                        print('.', end="") #Delay for time stamp
                     d1 = datetime.now()
                     d3 = int(d1.strftime("%Y%m%d%H%M%S"))
                     
@@ -556,7 +553,10 @@ def ReformatDictFile():
                     "((SELECT id FROM account_info WHERE name = ?), ?, ?, ?, ?, ?, ?, ?)",
                       (name1, trcode, d3, scode, info[i+2][1], info[i+2][2], info[i+2][3], info[i+2][4]))
                     #Update accounts_info here, scode and date d2.
-
+        
+        
+        #conn = sqlite3.connect('accounts_main.db')
+        #conn.execute("BEGIN")
         #conn.commit() or END TRANSACTION
         #cursor.execute("SELECT * FROM account_info")
         #cursor.execute("SELECT * FROM transactions")
