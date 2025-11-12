@@ -548,28 +548,31 @@ def ReformatDictFile():
                         print('.', end="") #Delay for time stamp
                     d1 = datetime.now()
                     d3 = int(d1.strftime("%Y%m%d%H%M%S"))
-                    
+
+                    cursor.execute("SELECT * FROM account_info WHERE name = ?", (name1,))
+                    ID1 = cursor.fetchone()[0]
+
                     cursor.execute("INSERT INTO transactions VALUES "
-                    "((SELECT id FROM account_info WHERE name = ?), ?, ?, ?, ?, ?, ?, ?)",
-                    (name1, trcode, d3, scode, info[i+2][1], info[i+2][2], info[i+2][3], info[i+2][4]))
+                    "(?, ?, ?, ?, ?, ?, ?, ?)",
+                    (ID1, trcode, d3, scode, info[i+2][1], info[i+2][2], info[i+2][3], info[i+2][4]))
                     
-                    #Update accounts_info.
-                        
+                    #Update accounts_info. (Add balance update.)
+                    
                     for S2 in range(11, 18, 3):
-                        cursor.execute("SELECT * FROM account_info WHERE name = ?", (name1,))
+                        cursor.execute("SELECT * FROM account_info WHERE id = ?", (ID1,))
                         S1 = cursor.fetchone()[S2]
                         if S1 == 0:
                             if S2 == 11:
-                                cursor.execute("UPDATE account_info SET service1_code = ?, service1_dtcr = ? WHERE name = ?",
-                                                (scode, d2, name1))
+                                cursor.execute("UPDATE account_info SET service1_code = ?, service1_dtcr = ? WHERE id = ?",
+                                                (scode, d2, ID1))
                                 break
                             if S2 == 14:
-                                cursor.execute("UPDATE account_info SET service2_code = ?, service2_dtcr = ? WHERE name = ?",
-                                                (scode, d2, name1))
+                                cursor.execute("UPDATE account_info SET service2_code = ?, service2_dtcr = ? WHERE id = ?",
+                                                (scode, d2, ID1))
                                 break
                             if S2 == 17:
-                                cursor.execute("UPDATE account_info SET service3_code = ?, service3_dtcr = ? WHERE name = ?",
-                                                (scode, d2, name1))
+                                cursor.execute("UPDATE account_info SET service3_code = ?, service3_dtcr = ? WHERE id = ?",
+                                                (scode, d2, ID1))
                                 break
                             
                     
