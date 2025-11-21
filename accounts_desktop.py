@@ -80,7 +80,7 @@ def UpdateAccounts():
     label.pack()
 
     frame = tk.Frame(root, width = '550', height = '700', bg=bgcol)
-    frame.pack()
+    frame.pack(expand=True, fill= 'both')
 
     #---Set window screen position
     fw = 550
