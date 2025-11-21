@@ -547,15 +547,15 @@ def ReformatDictFile():
 
                     trcode = "C1"
                     scode = srvc_code[i]
-                    for t in range(200000):
+                    for t in range(300000):
                         print('.', end="") #Delay for time stamp
                     d1 = datetime.now()
                     d3 = int(d1.strftime("%Y%m%d%H%M%S"))
-                    tot1 = info[i+2][1] - info[i+2][2]
+                    tot1 = round(info[i+2][1] - info[i+2][2],2)
                     cursor.execute("SELECT * FROM account_info WHERE name = ?", (name1,))
                     tup1 = cursor.fetchone()
                     ID1 = tup1[0]
-                    b1 = tup1[8] + tot1 #Balance update.
+                    b1 = round(tup1[8],2) + tot1 #Balance update.
                     s1 = tup1[11]
                     s2 = tup1[14]
                     s3 = tup1[17]
